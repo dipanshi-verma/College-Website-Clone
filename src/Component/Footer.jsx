@@ -13,10 +13,7 @@ const Footer = forwardRef((props, ref) => {
   };
 
   return (
-    <footer
-      ref={ref}
-      className="bg-blue-900 text-white p-10 mt-10 scroll-mt-20"
-    >
+    <footer ref={ref} className="bg-blue-200 text-blue-900 p-10 mt-10 scroll-mt-20">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* Contact Form */}
         <div>
@@ -28,7 +25,7 @@ const Footer = forwardRef((props, ref) => {
                 type="text"
                 name="name"
                 placeholder="Enter your name"
-                className="w-full p-2 rounded bg-blue-100 text-black"
+                className="w-full p-2 rounded bg-white border border-blue-300 text-blue-900"
                 required
               />
             </div>
@@ -38,7 +35,7 @@ const Footer = forwardRef((props, ref) => {
                 type="email"
                 name="email"
                 placeholder="example@gmail.com"
-                className="w-full p-2 rounded bg-blue-100 text-black"
+                className="w-full p-2 rounded bg-white border border-blue-300 text-blue-900"
                 required
               />
             </div>
@@ -48,13 +45,13 @@ const Footer = forwardRef((props, ref) => {
                 type="tel"
                 name="phone"
                 placeholder="Enter your contact number"
-                className="w-full p-2 rounded bg-blue-100 text-black"
+                className="w-full p-2 rounded bg-white border border-blue-300 text-blue-900"
                 required
               />
             </div>
             <button
               type="submit"
-              className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-6 rounded"
+              className="bg-blue-400 hover:bg-blue-300 text-white font-semibold py-2 px-6 rounded"
             >
               Submit
             </button>
@@ -73,12 +70,12 @@ const Footer = forwardRef((props, ref) => {
         </div>
       </div>
 
-      <p className="text-center text-sm mt-10">
-        &copy;{new Date().getFullYear()} Rangmanch University. All rights reserved.
-      
-      <p>Shantivan Road, Near Laxmipura Extension  
-         Rudrapark Area, Vadodara – 390025, Gujarat</p>
-      </p>
+      <div className="text-center text-sm mt-10 space-y-1">
+        <p>&copy;{new Date().getFullYear()} Parul University. All rights reserved.</p>
+        <p>P.O. Limda, Ta. Waghodia,
+           Vadodara – 391760,
+          Gujarat, India.</p>
+      </div>
     </footer>
   );
 });

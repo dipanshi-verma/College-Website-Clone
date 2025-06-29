@@ -15,7 +15,6 @@ import {
 const navItems = [
   { label: 'Home', path: '/' },
   { label: 'About Us', path: '/about' },
-  // Removed Contact Us
   { label: 'Login/Signup', path: '/login' },
 ];
 
@@ -87,7 +86,7 @@ function Navbar({ footerRef }) {
 
   return (
     <>
-      <AppBar position="static" className="bg-blue-700">
+      <AppBar position="static" className="!bg-blue-200 shadow-sm">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             {/* Logo */}
@@ -107,9 +106,9 @@ function Navbar({ footerRef }) {
                   key={item.label}
                   to={item.path}
                   onClick={() => handleNavClick(item.label)}
-                  className={`font-bold text-white border-b-4 ${
-                    activePage === item.label ? 'border-yellow-300' : 'border-transparent'
-                  } hover:border-blue-200 transition duration-300 px-2 py-1`}
+                  className={`font-semibold text-blue-900 border-b-4 ${
+                    activePage === item.label ? 'border-yellow-400' : 'border-transparent'
+                  } hover:border-blue-400 transition duration-300 px-2 py-1`}
                 >
                   {item.label}
                 </Link>
@@ -118,9 +117,9 @@ function Navbar({ footerRef }) {
               {/* Contact Us Scroll Button */}
               <button
                 onClick={handleScrollToFooter}
-                className={`font-bold text-white border-b-4 ${
-                  activePage === 'Contact Us' ? 'border-yellow-300' : 'border-transparent'
-                } hover:border-blue-200 transition duration-300 px-2 py-1 bg-transparent border-0`}
+                className={`font-semibold text-blue-900 border-b-4 ${
+                  activePage === 'Contact Us' ? 'border-yellow-400' : 'border-transparent'
+                } hover:border-blue-400 transition duration-300 px-2 py-1 bg-transparent border-0`}
               >
                 Contact Us
               </button>
@@ -133,9 +132,9 @@ function Navbar({ footerRef }) {
                 <Button
                   sx={{
                     fontWeight: 'bold',
-                    color: 'white',
-                    borderBottom: anchorFaculty ? '4px solid #ffeb3b' : '4px solid transparent',
-                    '&:hover': { borderBottom: '4px solid #90caf9' },
+                    color: '#1D4ED8',
+                    borderBottom: anchorFaculty ? '4px solid #FACC15' : '4px solid transparent',
+                    '&:hover': { borderBottom: '4px solid #60A5FA' },
                     borderRadius: 0,
                   }}
                 >
@@ -147,9 +146,9 @@ function Navbar({ footerRef }) {
                     onMouseEnter={() => setAnchorFaculty(anchorFaculty)}
                     onMouseLeave={() => setAnchorFaculty(null)}
                     sx={{
-                      bgcolor: 'rgba(173, 216, 230, 0.85)',
+                      bgcolor: 'rgba(219, 234, 254, 0.95)',
                       backdropFilter: 'blur(6px)',
-                      color: 'black',
+                      color: '#1D4ED8',
                       width: '100vw',
                       left: 0,
                       p: 3,
@@ -181,9 +180,9 @@ function Navbar({ footerRef }) {
                 <Button
                   sx={{
                     fontWeight: 'bold',
-                    color: 'white',
-                    borderBottom: anchorAdmission ? '4px solid #ffeb3b' : '4px solid transparent',
-                    '&:hover': { borderBottom: '4px solid #90caf9' },
+                    color: '#1D4ED8',
+                    borderBottom: anchorAdmission ? '4px solid #FACC15' : '4px solid transparent',
+                    '&:hover': { borderBottom: '4px solid #60A5FA' },
                     borderRadius: 0,
                   }}
                 >
@@ -195,9 +194,9 @@ function Navbar({ footerRef }) {
                     onMouseEnter={() => setAnchorAdmission(anchorAdmission)}
                     onMouseLeave={() => setAnchorAdmission(null)}
                     sx={{
-                      bgcolor: 'rgba(173, 216, 230, 0.85)',
+                      bgcolor: 'rgba(219, 234, 254, 0.95)',
                       backdropFilter: 'blur(6px)',
-                      color: 'black',
+                      color: '#1D4ED8',
                       width: '100vw',
                       left: 0,
                       p: 3,
@@ -232,7 +231,7 @@ function Navbar({ footerRef }) {
 
       {/* Faculty Info Display */}
       {selectedFaculty && (
-        <Box className="p-6">
+        <Box className="p-6 bg-blue-100 text-blue-900">
           <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2 }}>
             {selectedFaculty}
           </Typography>
@@ -244,7 +243,7 @@ function Navbar({ footerRef }) {
 
       {/* Admission Info Display */}
       {selectedAdmission && (
-        <Box className="p-6">
+        <Box className="p-6 bg-blue-100 text-blue-900">
           <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2 }}>
             {selectedAdmission}
           </Typography>
