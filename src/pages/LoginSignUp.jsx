@@ -1,3 +1,4 @@
+// LoginSignup.jsx
 import React, { useState } from "react";
 
 const Auth = () => {
@@ -26,16 +27,14 @@ const Auth = () => {
 
   return (
     <div className="min-h-screen bg-[#F1F5F9] flex flex-col items-center justify-center px-4 py-10">
-    
       <img
         src="https://pbs.twimg.com/media/GcfFXk-XkAAMdwf.jpg:large"
         alt="Parul University Logo"
         className="w-24 md:w-28 mb-6"
       />
 
-      
       <div className="relative w-full max-w-4xl bg-white rounded-xl shadow-lg overflow-hidden">
-        
+        {/* Switch Buttons */}
         <div className="flex justify-between text-center text-sm font-medium border-b border-gray-200">
           <button
             className={`w-1/2 py-3 transition ${
@@ -58,26 +57,29 @@ const Auth = () => {
           </button>
         </div>
 
-        
+        {/* Login / Register Panels */}
         <div className="relative h-[540px]">
           <div
             className={`flex w-[200%] transition-transform duration-500 ${
               isRegistering ? "-translate-x-1/2" : "translate-x-0"
             }`}
           >
-           
+            {/* Login Form */}
             <form className="w-1/2 p-8 space-y-6">
               <h2 className="text-2xl font-bold">Welcome Back</h2>
               <input type="email" placeholder="Email" required className="w-full p-3 border border-gray-300 rounded-md" />
               <input type="password" placeholder="Password" required className="w-full p-3 border border-gray-300 rounded-md" />
-              <button type="submit" className="w-full bg-[royalblue] text-white py-2 rounded-md font-semibold hover:bg-blue-800 transition">
+              <button
+                type="submit"
+                className="w-full bg-[royalblue] text-white py-2 rounded-md font-semibold hover:bg-blue-800 transition"
+              >
                 Login
               </button>
             </form>
 
-            
+            {/* Registration Form */}
             <form className="w-1/2 p-8 space-y-6">
-              
+              {/* Step Indicator */}
               <div className="flex justify-between gap-2">
                 {[1, 2, 3].map((s) => (
                   <div
@@ -88,6 +90,7 @@ const Auth = () => {
               </div>
               <h2 className="text-2xl font-bold text-center">Create an Account</h2>
 
+              {/* Step 1: Personal Info */}
               {step === 1 && (
                 <div className="space-y-4">
                   <input
@@ -126,6 +129,7 @@ const Auth = () => {
                 </div>
               )}
 
+              {/* Step 2: Contact Info */}
               {step === 2 && (
                 <div className="space-y-4">
                   <input
@@ -145,6 +149,7 @@ const Auth = () => {
                 </div>
               )}
 
+              {/* Step 3: Confirmation */}
               {step === 3 && (
                 <div className="space-y-4 text-sm">
                   <input
@@ -175,7 +180,7 @@ const Auth = () => {
                 </div>
               )}
 
-        
+              {/* Navigation Buttons */}
               <div className="flex justify-between items-center">
                 <button
                   type="button"

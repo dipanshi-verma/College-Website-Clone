@@ -1,5 +1,7 @@
+// Footer.jsx
 import React, { forwardRef } from 'react';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 const Footer = forwardRef((props, ref) => {
   const handleSubmit = (e) => {
@@ -62,19 +64,18 @@ const Footer = forwardRef((props, ref) => {
         <div>
           <h2 className="text-2xl font-bold mb-4">Quick Links</h2>
           <ul className="space-y-2">
-            <li><a href="#" className="hover:underline">Home</a></li>
-            <li><a href="#" className="hover:underline">About Us</a></li>
-            <li><a href="#" className="hover:underline">Login</a></li>
+            <li><Link to="/" className="hover:underline">Home</Link></li>
+            <li><Link to="/about" className="hover:underline">About Us</Link></li>
+            <li><Link to="/login" className="hover:underline">Login</Link></li>
             <li><a href="#" className="hover:underline">Terms & Conditions</a></li>
           </ul>
         </div>
       </div>
 
+      {/* Footer Bottom */}
       <div className="text-center text-sm mt-10 space-y-1">
         <p>&copy;{new Date().getFullYear()} Parul University. All rights reserved.</p>
-        <p>P.O. Limda, Ta. Waghodia,
-           Vadodara – 391760,
-          Gujarat, India.</p>
+        <p>P.O. Limda, Ta. Waghodia, Vadodara – 391760, Gujarat, India.</p>
       </div>
     </footer>
   );

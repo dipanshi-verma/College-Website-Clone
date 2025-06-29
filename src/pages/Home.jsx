@@ -1,3 +1,4 @@
+// Home.jsx
 import React, { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -44,6 +45,7 @@ const Home = () => {
 
   return (
     <div className="bg-[#F1F5F9] text-gray-800 font-sans">
+      {/* Hero Section with Image Slider */}
       <section className="relative w-full overflow-hidden bg-white" data-aos="fade-in">
         <div className="w-full flex justify-center">
           <img
@@ -54,7 +56,7 @@ const Home = () => {
         </div>
       </section>
 
-    
+      {/* Address Block */}
       <section className="flex justify-center px-6 pt-6" data-aos="fade-up">
         <div className="bg-white/80 backdrop-blur-md p-4 rounded-lg shadow-md gap-4 max-w-[90%] w-full justify-center flex">
           <div className="flex items-center gap-4">
@@ -69,7 +71,7 @@ const Home = () => {
         </div>
       </section>
 
-      
+      {/* Statistics Section */}
       <section className="py-20 px-6 max-w-7xl mx-auto text-center" data-aos="fade-up">
         <h2 className="text-3xl font-bold mb-12">By The Numbers</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
@@ -93,7 +95,7 @@ const Home = () => {
         </div>
       </section>
 
-      
+      {/* FAQ Section */}
       <section className="py-20 px-6 bg-white text-left max-w-4xl mx-auto" data-aos="fade-up">
         <h2 className="text-3xl font-bold mb-10 text-center">Frequently Asked Questions</h2>
         <div className="space-y-6">
@@ -110,11 +112,9 @@ const Home = () => {
           ))}
         </div>
 
-        
+        {/* Submit a Question */}
         <form onSubmit={handleSubmit} className="mt-12 space-y-4" data-aos="fade-up">
-          <label className="block font-medium text-gray-700">
-            Have your own question?
-          </label>
+          <label className="block font-medium text-gray-700">Have your own question?</label>
           <textarea
             value={question}
             onChange={(e) => setQuestion(e.target.value)}

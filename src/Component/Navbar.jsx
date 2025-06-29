@@ -1,5 +1,6 @@
+// Navbar.jsx
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   AppBar,
   Box,
@@ -53,17 +54,11 @@ const admissionDropdown = {
 };
 
 function Navbar({ footerRef }) {
-  const [activePage, setActivePage] = useState('Home');
   const [anchorFaculty, setAnchorFaculty] = useState(null);
   const [anchorAdmission, setAnchorAdmission] = useState(null);
   const [selectedFaculty, setSelectedFaculty] = useState(null);
   const [selectedAdmission, setSelectedAdmission] = useState(null);
-
-  const handleNavClick = (page) => {
-    setSelectedFaculty(null);
-    setSelectedAdmission(null);
-    setActivePage(page);
-  };
+  const location = useLocation();
 
   const handleFacultyClick = (faculty) => {
     setSelectedFaculty(faculty);
@@ -80,8 +75,11 @@ function Navbar({ footerRef }) {
   const handleScrollToFooter = () => {
     setSelectedFaculty(null);
     setSelectedAdmission(null);
-    setActivePage('Contact Us');
-    footerRef?.current?.scrollIntoView({ behavior: 'smooth' });
+    if (location.pathname === '/') {
+      footerRef?.current?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.location.href = '/#contact'; // fallback in case ref isn't available
+    }
   };
 
   return (
@@ -98,27 +96,25 @@ function Navbar({ footerRef }) {
               />
             </Box>
 
-            {/* Nav & Dropdowns */}
+            {/* Navigation Items */}
             <Box className="flex gap-6 items-center flex-grow">
-              {/* Static Nav Links */}
               {navItems.map((item) => (
                 <Link
                   key={item.label}
                   to={item.path}
-                  onClick={() => handleNavClick(item.label)}
                   className={`font-semibold text-blue-900 border-b-4 ${
-                    activePage === item.label ? 'border-yellow-400' : 'border-transparent'
+                    location.pathname === item.path ? 'border-yellow-400' : 'border-transparent'
                   } hover:border-blue-400 transition duration-300 px-2 py-1`}
                 >
                   {item.label}
                 </Link>
               ))}
 
-              {/* Contact Us Scroll Button */}
+              {/* Contact Us button */}
               <button
                 onClick={handleScrollToFooter}
                 className={`font-semibold text-blue-900 border-b-4 ${
-                  activePage === 'Contact Us' ? 'border-yellow-400' : 'border-transparent'
+                  location.pathname === '/contact' ? 'border-yellow-400' : 'border-transparent'
                 } hover:border-blue-400 transition duration-300 px-2 py-1 bg-transparent border-0`}
               >
                 Contact Us
@@ -140,7 +136,6 @@ function Navbar({ footerRef }) {
                 >
                   Courses
                 </Button>
-
                 <Popper open={Boolean(anchorFaculty)} anchorEl={anchorFaculty} placement="bottom-start">
                   <Paper
                     onMouseEnter={() => setAnchorFaculty(anchorFaculty)}
@@ -188,7 +183,6 @@ function Navbar({ footerRef }) {
                 >
                   Admissions
                 </Button>
-
                 <Popper open={Boolean(anchorAdmission)} anchorEl={anchorAdmission} placement="bottom-start">
                   <Paper
                     onMouseEnter={() => setAnchorAdmission(anchorAdmission)}
@@ -229,26 +223,27 @@ function Navbar({ footerRef }) {
         </Container>
       </AppBar>
 
-      {/* Faculty Info Display */}
+      {/* Dropdown Content Below Nav */}
       {selectedFaculty && (
         <Box className="p-6 bg-blue-100 text-blue-900">
           <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2 }}>
             {selectedFaculty}
           </Typography>
           <Typography>
-            This is detailed information about <strong>{selectedFaculty}</strong>. You can customize this section to show real data, course offerings, faculty members, or any other relevant content.
+            This is detailed information about <strong>{selectedFaculty}</strong>. You can customize this section to show
+            real data, course offerings, faculty members, or any other relevant content.
           </Typography>
         </Box>
       )}
 
-      {/* Admission Info Display */}
       {selectedAdmission && (
         <Box className="p-6 bg-blue-100 text-blue-900">
           <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2 }}>
             {selectedAdmission}
           </Typography>
           <Typography>
-            You selected <strong>{selectedAdmission}</strong> from the Admissions dropdown. Here, you can display application instructions, eligibility criteria, fee details, etc.
+            You selected <strong>{selectedAdmission}</strong> from the Admissions dropdown. Here, you can display application
+            instructions, eligibility criteria, fee details, etc.
           </Typography>
         </Box>
       )}
