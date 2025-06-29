@@ -1,22 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Home from './pages/Home'
-import About from './pages/AboutUs'
-import Auth from './pages/LoginSignUp'
+import { useRef } from 'react';
+import './App.css';
+import Navbar from './Component/Navbar';
+import Footer from './Component/Footer';
+
+import Home from './pages/Home';
+import About from './pages/AboutUs';
+import Auth from './pages/LoginSignUp';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const footerRef = useRef(null); 
 
   return (
     <>
-
-      <Auth/>
-      <Home/>
-      <About/>
+      <Navbar footerRef={footerRef} />
+      <Auth />
+      <Home />
+      <About />
+      <Footer ref={footerRef} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
