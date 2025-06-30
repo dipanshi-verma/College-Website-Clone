@@ -14,7 +14,7 @@ import {
   IconButton,
   List,
   ListItem,
-  ListItemText
+  ListItemText,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
@@ -22,11 +22,42 @@ import CloseIcon from '@mui/icons-material/Close';
 const navItems = [
   { label: 'Home', path: '/' },
   { label: 'About Us', path: '/about' },
-  { label: 'Login/Signup', path: '/login' }
+  { label: 'Login/Signup', path: '/login' },
 ];
 
-const CoursesDropdown = [ /* your courses */ ];
-const admissionDropdown = { /* your admission categories */ };
+const CoursesDropdown = [
+  'Faculty of Commerce',
+  'Faculty of Design',
+  'Faculty of IT & Computer Science',
+  'Faculty of Engineering & Technology',
+  'Faculty of Fine Arts',
+  'Faculty of Hotel Management and Catering Technology',
+  'Faculty of Law',
+  'Faculty of Medicine',
+  'Faculty of Pharmacy',
+  'Faculty of Social Work',
+];
+
+const admissionDropdown = {
+  'Explore Our Programs': [
+    'Diploma Programs',
+    'Bachelors Programs',
+    'Masters Programs',
+    'Doctoral & Post Doctoral Programs',
+    'Honors Programs',
+    'Industry Embedded Programs',
+    'Online Programs',
+  ],
+  'Pathway Programs': [
+    'Global Programs',
+    'How To Apply',
+    'Pay Your Fees',
+    'Scholarships',
+    'Continuing Education Programs',
+    'Admission Offices',
+    'Dual Degree Programs',
+  ],
+};
 
 function Navbar({ footerRef }) {
   const [anchorFaculty, setAnchorFaculty] = useState(null);
@@ -67,7 +98,7 @@ function Navbar({ footerRef }) {
 
   return (
     <>
-      <AppBar position="static" className="!bg-blue-200 shadow-sm">
+      <AppBar position="static" className="!bg-blue-200 shadow-sm z-[1200]">
         <Container maxWidth="xl">
           <Toolbar className="flex justify-between">
             {/* Logo */}
@@ -101,7 +132,7 @@ function Navbar({ footerRef }) {
                   fontWeight: 'bold',
                   color: '#1D4ED8',
                   borderBottom: '4px solid transparent',
-                  '&:hover': { borderBottom: '4px solid #60A5FA' }
+                  '&:hover': { borderBottom: '4px solid #60A5FA' },
                 }}
               >
                 Contact Us
@@ -118,23 +149,28 @@ function Navbar({ footerRef }) {
                     color: '#1D4ED8',
                     borderBottom: anchorFaculty ? '4px solid #FACC15' : '4px solid transparent',
                     '&:hover': { borderBottom: '4px solid #60A5FA' },
-                    borderRadius: 0
+                    borderRadius: 0,
                   }}
                 >
                   Courses
                 </Button>
-                <Popper open={Boolean(anchorFaculty)} anchorEl={anchorFaculty} placement="bottom-start">
+                <Popper
+                  open={Boolean(anchorFaculty)}
+                  anchorEl={anchorFaculty}
+                  placement="bottom-start"
+                  disablePortal={false}
+                  modifiers={[{ name: 'zIndex', enabled: true }]}
+                >
                   <Paper
-                    onMouseEnter={() => setAnchorFaculty(anchorFaculty)}
-                    onMouseLeave={() => setAnchorFaculty(null)}
                     sx={{
+                      zIndex: 1300,
                       bgcolor: 'rgba(219, 234, 254, 0.95)',
                       backdropFilter: 'blur(6px)',
                       color: '#1D4ED8',
                       width: '100vw',
                       left: 0,
                       p: 3,
-                      borderRadius: 0
+                      borderRadius: 0,
                     }}
                   >
                     <Grid container spacing={2}>
@@ -143,7 +179,7 @@ function Navbar({ footerRef }) {
                           <Typography
                             sx={{
                               cursor: 'pointer',
-                              '&:hover': { textDecoration: 'underline' }
+                              '&:hover': { textDecoration: 'underline' },
                             }}
                           >
                             {faculty}
@@ -166,23 +202,28 @@ function Navbar({ footerRef }) {
                     color: '#1D4ED8',
                     borderBottom: anchorAdmission ? '4px solid #FACC15' : '4px solid transparent',
                     '&:hover': { borderBottom: '4px solid #60A5FA' },
-                    borderRadius: 0
+                    borderRadius: 0,
                   }}
                 >
                   Admissions
                 </Button>
-                <Popper open={Boolean(anchorAdmission)} anchorEl={anchorAdmission} placement="bottom-start">
+                <Popper
+                  open={Boolean(anchorAdmission)}
+                  anchorEl={anchorAdmission}
+                  placement="bottom-start"
+                  disablePortal={false}
+                  modifiers={[{ name: 'zIndex', enabled: true }]}
+                >
                   <Paper
-                    onMouseEnter={() => setAnchorAdmission(anchorAdmission)}
-                    onMouseLeave={() => setAnchorAdmission(null)}
                     sx={{
+                      zIndex: 1300,
                       bgcolor: 'rgba(219, 234, 254, 0.95)',
                       backdropFilter: 'blur(6px)',
                       color: '#1D4ED8',
                       width: '100vw',
                       left: 0,
                       p: 3,
-                      borderRadius: 0
+                      borderRadius: 0,
                     }}
                   >
                     <Grid container spacing={4}>
@@ -197,7 +238,7 @@ function Navbar({ footerRef }) {
                               sx={{
                                 py: 0.5,
                                 cursor: 'pointer',
-                                '&:hover': { textDecoration: 'underline' }
+                                '&:hover': { textDecoration: 'underline' },
                               }}
                             >
                               {program}
