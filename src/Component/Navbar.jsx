@@ -109,7 +109,7 @@ function Navbar({ footerRef }) {
                 className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover"
               />
               <Typography variant="h6" className="text-blue-900 font-bold hidden sm:block">
-                University Portal
+                Parul University Portal
               </Typography>
             </Box>
 
