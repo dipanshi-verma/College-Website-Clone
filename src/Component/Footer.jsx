@@ -17,7 +17,7 @@ const Footer = forwardRef((props, ref) => {
   };
 
   // Smart link handler
-  const handleNavigation = (path) => {
+  const handleNavigation = (path) => {  
     if (location.pathname === path) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
