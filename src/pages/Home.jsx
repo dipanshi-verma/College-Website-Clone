@@ -65,7 +65,7 @@ const Home = () => {
               alt="College Logo"
               className="h-16 md:h-20 object-contain"
             />
-            <p>Address,</p>
+            <p></p>
             <p>P.O. Limda, Vadodara, Gujarat, India</p>
           </div>
         </div>
