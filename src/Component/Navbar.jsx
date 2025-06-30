@@ -119,9 +119,8 @@ function Navbar({ footerRef }) {
                 <Link
                   key={item.label}
                   to={item.path}
-                  className={`font-semibold text-blue-900 border-b-4 ${
-                    location.pathname === item.path ? 'border-yellow-400' : 'border-transparent'
-                  } hover:border-blue-400 transition px-2 py-1`}
+                  className={`font-semibold text-blue-900 border-b-4 ${location.pathname === item.path ? 'border-yellow-400' : 'border-transparent'
+                    } hover:border-blue-400 transition px-2 py-1`}
                 >
                   {item.label}
                 </Link>
