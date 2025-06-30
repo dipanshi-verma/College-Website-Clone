@@ -26,7 +26,7 @@ const Footer = forwardRef((props, ref) => {
   };
 
   return (
-    <footer ref={ref} className="bg-blue-200 text-blue-900 px-4 sm:px-6 py-10 scroll-mt-20 w-full">
+    <footer ref={ref} className="bg-blue-200 text-blue-900 px-4 sm:px-6 py-10 mt-2 scroll-mt-20 w-full">
       <div className="max-w-7xl mx-auto flex flex-col lg:grid lg:grid-cols-3 gap-8">
         {/* Contact Form */}
         <div className="lg:col-span-1">

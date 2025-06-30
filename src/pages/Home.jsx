@@ -3,8 +3,8 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const imageList = [
-  "https://universityfindo.com/uploads/news/f03f897592faef334926e9ff242179de.png",
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfLUlSwlRJSKfukPv05vFdT8d3Syo7gdLj0w&s",
+  "https://paruluniversity.ac.in/app/images/post/blog/featured_image/412491Gate%20Picture%20(1).jpg",
+  "https://pimwp.s3.ap-south-1.amazonaws.com/2024/05/Untitled-design-92-1-jpg.webp",
   "https://media.ahmedabadmirror.com/am/uploads/mediaGallery/image/1716202469739.jpg-org",
 ];
 
@@ -100,24 +100,15 @@ const Home = () => {
                 key={index}
                 src={src}
                 alt={`Slide ${index + 1}`}
-                className="w-full shrink-0 object-contain max-h-[550px]"
+                
+                className="w-full  shrink-0 object-contain max-h-[550px]"
               />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Address */}
-      <section className="flex justify-center px-6 pt-6" data-aos="fade-up">
-        <div className="bg-white/80 backdrop-blur-md p-4 rounded-lg shadow-md max-w-[90%] w-full flex items-center gap-4">
-          <img
-            src="https://pbs.twimg.com/media/GcfFXk-XkAAMdwf.jpg:large"
-            alt="College Logo"
-            className="h-16 md:h-20 object-contain"
-          />
-          <p>P.O. Limda, Vadodara, Gujarat, India</p>
-        </div>
-      </section>
+      
 
       {/* Stats */}
       <section className="py-20 px-6 max-w-7xl mx-auto text-center" data-aos="fade-up">
@@ -138,13 +129,14 @@ const Home = () => {
             >
               <h3 className="text-4xl font-bold">{item.value}</h3>
               <p className="mt-2 text-sm font-medium uppercase tracking-wide">{item.title}</p>
+              
             </div>
           ))}
         </div>
       </section>
 
       {/* Testimonials */}
-     <section className="py-20 px-6 bg-white" data-aos="fade-up">
+     <section className="py-20 px-6 " data-aos="fade-up">
   <h2 className="text-3xl font-bold text-center mb-10">What Our Students Say</h2>
 
   <div className="flex justify-center items-center overflow-hidden max-w-6xl mx-auto">
@@ -196,7 +188,8 @@ const Home = () => {
   </div>
 </section>
       {/* FAQ Section */}
-      <section className="py-20 px-6 bg-white text-left max-w-4xl mx-auto" data-aos="fade-up">
+      <div className=" w-full">
+<section className="py-20 px-6 text-left max-w-lg mx-auto" data-aos="fade-up">
         <h2 className="text-3xl font-bold mb-10 text-center">Frequently Asked Questions</h2>
         <div className="space-y-6">
           {faqs.map((faq, idx) => (
@@ -247,6 +240,9 @@ const Home = () => {
           )}
         </form>
       </section>
+
+      </div>
+      
     </div>
   );
 };
