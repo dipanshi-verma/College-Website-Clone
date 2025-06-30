@@ -87,9 +87,9 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-[#F1F5F9] text-gray-800 font-sans mt-10">
+    <div className="bg-[#F1F5F9] text-gray-800 font-sans mt-2 shadow-2xl">
       {/* Hero Carousel */}
-      <section className="relative w-full overflow-hidden bg-white" data-aos="fade-in">
+      <section className="relative w-full overflow-hidden bg-[#f1f5f9d0]" data-aos="fade-in">
         <div className="relative w-full max-h-[550px]">
           <div
             className="flex transition-transform duration-700 ease-in-out"
