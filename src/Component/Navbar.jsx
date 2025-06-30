@@ -104,7 +104,7 @@ function Navbar({ footerRef }) {
             {/* Logo */}
             <Box className="flex items-center gap-3">
               <img
-                src="https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg"
+                src="https://pbs.twimg.com/media/GcfFXk-XkAAMdwf.jpg"
                 alt="Logo"
                 className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover"
               />
