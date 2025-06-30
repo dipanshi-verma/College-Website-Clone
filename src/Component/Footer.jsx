@@ -1,8 +1,11 @@
 import React, { forwardRef } from 'react';
 import Swal from 'sweetalert2';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Footer = forwardRef((props, ref) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     Swal.fire({
@@ -11,6 +14,15 @@ const Footer = forwardRef((props, ref) => {
       text: 'Your message has been sent successfully.',
     });
     e.target.reset();
+  };
+
+  // Smart link handler
+  const handleNavigation = (path) => {
+    if (location.pathname === path) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate(path);
+    }
   };
 
   return (
@@ -63,10 +75,26 @@ const Footer = forwardRef((props, ref) => {
         <div className="lg:col-span-1">
           <h2 className="text-2xl font-bold mb-4">Quick Links</h2>
           <ul className="space-y-2">
-            <li><Link to="/" className="hover:underline">Home</Link></li>
-            <li><Link to="/about" className="hover:underline">About Us</Link></li>
-            <li><Link to="/login" className="hover:underline">Login</Link></li>
-            <li><a href="#" className="hover:underline">Terms & Conditions</a></li>
+            <li>
+              <button onClick={() => handleNavigation('/')} className="hover:underline text-left w-full">
+                Home
+              </button>
+            </li>
+            <li>
+              <button onClick={() => handleNavigation('/about')} className="hover:underline text-left w-full">
+                About Us
+              </button>
+            </li>
+            <li>
+              <button onClick={() => handleNavigation('/login')} className="hover:underline text-left w-full">
+                Login
+              </button>
+            </li>
+            <li>
+              <a href="#" className="hover:underline">
+                Terms & Conditions
+              </a>
+            </li>
           </ul>
         </div>
       </div>

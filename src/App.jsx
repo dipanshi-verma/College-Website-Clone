@@ -5,6 +5,7 @@ import './App.css';
 
 import Navbar from './Component/Navbar';
 import Footer from './Component/Footer';
+import ScrollToTop from './Component/ScrollToTop';
 
 import Home from './pages/Home';
 import About from './pages/AboutUs';
@@ -15,14 +16,14 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       <Navbar footerRef={footerRef} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Auth />} />
-        <Route path="/contact" element={<Footer ref={footerRef} />} />
+        {/* No need for a standalone footer route */}
       </Routes>
-      {/* Footer rendered here as default for every page */}
       <Footer ref={footerRef} />
     </>
   );

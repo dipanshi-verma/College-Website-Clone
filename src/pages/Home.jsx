@@ -46,15 +46,23 @@ const Home = () => {
   return (
     <div className="bg-[#F1F5F9] text-gray-800 font-sans mt-10">
       {/* Hero Section with Image Slider */}
-      <section className="relative w-full overflow-hidden bg-white" data-aos="fade-in">
-        <div className="w-full flex justify-center">
-          <img
-            src={imageList[currentIndex]}
-            alt={`Slide ${currentIndex + 1}`}
-            className="w-full max-h-[550px] object-contain transition-all duration-700 ease-in-out"
-          />
-        </div>
-      </section>
+     <section className="relative w-full overflow-hidden bg-white" data-aos="fade-in">
+  <div className="relative w-full max-h-[550px]">
+    <div
+      className="flex transition-transform duration-700 ease-in-out"
+      style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+    >
+      {imageList.map((src, index) => (
+        <img
+          key={index}
+          src={src}
+          alt={`Slide ${index + 1}`}
+          className="w-full shrink-0 object-contain max-h-[550px]"
+        />
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Address Block */}
       <section className="flex justify-center px-6 pt-6" data-aos="fade-up">
