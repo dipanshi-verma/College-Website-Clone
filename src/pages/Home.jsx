@@ -44,7 +44,7 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-[#F1F5F9] text-gray-800 font-sans">
+    <div className="bg-[#F1F5F9] text-gray-800 font-sans mt-10">
       {/* Hero Section with Image Slider */}
       <section className="relative w-full overflow-hidden bg-white" data-aos="fade-in">
         <div className="w-full flex justify-center">

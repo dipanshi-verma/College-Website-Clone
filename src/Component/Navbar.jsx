@@ -1,9 +1,7 @@
-// Navbar.jsx
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   AppBar,
-  Box,
   Toolbar,
   Container,
   Button,
@@ -11,114 +9,103 @@ import {
   Popper,
   Paper,
   Grid,
+  Box,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText
 } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
 const navItems = [
   { label: 'Home', path: '/' },
   { label: 'About Us', path: '/about' },
-  { label: 'Login/Signup', path: '/login' },
+  { label: 'Login/Signup', path: '/login' }
 ];
 
-const CoursesDropdown = [
-  'Faculty of Commerce',
-  'Faculty of Design',
-  'Faculty of IT & Computer Science',
-  'Faculty of Engineering & Technology',
-  'Faculty of Fine Arts',
-  'Faculty of Hotel Management and Catering Technology',
-  'Faculty of Law',
-  'Faculty of Medicine',
-  'Faculty of Pharmacy',
-  'Faculty of Social Work',
-];
-
-const admissionDropdown = {
-  'Explore Our Programs': [
-    'Diploma Programs',
-    'Bachelors Programs',
-    'Masters Programs',
-    'Doctoral & Post Doctoral Programs',
-    'Honors Programs',
-    'Industry Embedded Programs',
-    'Online Programs',
-  ],
-  'Pathway Programs': [
-    'Global Programs',
-    'How To Apply',
-    'Pay Your Fees',
-    'Scholarships',
-    'Continuing Education Programs',
-    'Admission Offices',
-    'Dual Degree Programs',
-  ],
-};
+const CoursesDropdown = [ /* your courses */ ];
+const admissionDropdown = { /* your admission categories */ };
 
 function Navbar({ footerRef }) {
   const [anchorFaculty, setAnchorFaculty] = useState(null);
   const [anchorAdmission, setAnchorAdmission] = useState(null);
-  const [selectedFaculty, setSelectedFaculty] = useState(null);
-  const [selectedAdmission, setSelectedAdmission] = useState(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
 
-  const handleFacultyClick = (faculty) => {
-    setSelectedFaculty(faculty);
-    setSelectedAdmission(null);
-    setAnchorFaculty(null);
-  };
-
-  const handleAdmissionClick = (program) => {
-    setSelectedAdmission(program);
-    setSelectedFaculty(null);
-    setAnchorAdmission(null);
-  };
+  const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
   const handleScrollToFooter = () => {
-    setSelectedFaculty(null);
-    setSelectedAdmission(null);
+    setAnchorFaculty(null);
+    setAnchorAdmission(null);
+    setMobileOpen(false);
     if (location.pathname === '/') {
       footerRef?.current?.scrollIntoView({ behavior: 'smooth' });
     } else {
-      window.location.href = '/#contact'; // fallback in case ref isn't available
+      window.location.href = '/#contact';
     }
   };
+
+  const drawerContent = (
+    <Box sx={{ width: 250 }} role="presentation" onClick={handleDrawerToggle}>
+      <Box className="flex justify-end p-2">
+        <IconButton><CloseIcon /></IconButton>
+      </Box>
+      <List>
+        {navItems.map((item) => (
+          <ListItem button component={Link} to={item.path} key={item.label}>
+            <ListItemText primary={item.label} />
+          </ListItem>
+        ))}
+        <ListItem button onClick={handleScrollToFooter}>
+          <ListItemText primary="Contact Us" />
+        </ListItem>
+      </List>
+    </Box>
+  );
 
   return (
     <>
       <AppBar position="static" className="!bg-blue-200 shadow-sm">
         <Container maxWidth="xl">
-          <Toolbar disableGutters>
+          <Toolbar className="flex justify-between">
             {/* Logo */}
-            <Box className="mr-3">
+            <Box className="flex items-center gap-3">
               <img
                 src="https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg"
                 alt="Logo"
-                className="w-10 h-10 rounded-full object-cover"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover"
               />
+              <Typography variant="h6" className="text-blue-900 font-bold hidden sm:block">
+                University Portal
+              </Typography>
             </Box>
 
-            {/* Navigation Items */}
-            <Box className="flex gap-6 items-center flex-grow">
+            {/* Desktop Nav */}
+            <Box className="hidden md:flex gap-6 items-center">
               {navItems.map((item) => (
                 <Link
                   key={item.label}
                   to={item.path}
                   className={`font-semibold text-blue-900 border-b-4 ${
                     location.pathname === item.path ? 'border-yellow-400' : 'border-transparent'
-                  } hover:border-blue-400 transition duration-300 px-2 py-1`}
+                  } hover:border-blue-400 transition px-2 py-1`}
                 >
                   {item.label}
                 </Link>
               ))}
-
-              {/* Contact Us button */}
-              <button
+              <Button
                 onClick={handleScrollToFooter}
-                className={`font-semibold text-blue-900 border-b-4 ${
-                  location.pathname === '/contact' ? 'border-yellow-400' : 'border-transparent'
-                } hover:border-blue-400 transition duration-300 px-2 py-1 bg-transparent border-0`}
+                sx={{
+                  fontWeight: 'bold',
+                  color: '#1D4ED8',
+                  borderBottom: '4px solid transparent',
+                  '&:hover': { borderBottom: '4px solid #60A5FA' }
+                }}
               >
                 Contact Us
-              </button>
+              </Button>
 
               {/* Courses Dropdown */}
               <Box
@@ -131,7 +118,7 @@ function Navbar({ footerRef }) {
                     color: '#1D4ED8',
                     borderBottom: anchorFaculty ? '4px solid #FACC15' : '4px solid transparent',
                     '&:hover': { borderBottom: '4px solid #60A5FA' },
-                    borderRadius: 0,
+                    borderRadius: 0
                   }}
                 >
                   Courses
@@ -147,16 +134,17 @@ function Navbar({ footerRef }) {
                       width: '100vw',
                       left: 0,
                       p: 3,
-                      borderRadius: 0,
+                      borderRadius: 0
                     }}
                   >
                     <Grid container spacing={2}>
-                      {CoursesDropdown.map((faculty, index) => (
-                        <Grid item xs={12} sm={6} md={4} key={index}>
+                      {CoursesDropdown.map((faculty, idx) => (
+                        <Grid item xs={12} sm={6} md={4} key={idx}>
                           <Typography
-                            variant="body1"
-                            sx={{ cursor: 'pointer', '&:hover': { textDecoration: 'underline' } }}
-                            onClick={() => handleFacultyClick(faculty)}
+                            sx={{
+                              cursor: 'pointer',
+                              '&:hover': { textDecoration: 'underline' }
+                            }}
                           >
                             {faculty}
                           </Typography>
@@ -178,7 +166,7 @@ function Navbar({ footerRef }) {
                     color: '#1D4ED8',
                     borderBottom: anchorAdmission ? '4px solid #FACC15' : '4px solid transparent',
                     '&:hover': { borderBottom: '4px solid #60A5FA' },
-                    borderRadius: 0,
+                    borderRadius: 0
                   }}
                 >
                   Admissions
@@ -194,7 +182,7 @@ function Navbar({ footerRef }) {
                       width: '100vw',
                       left: 0,
                       p: 3,
-                      borderRadius: 0,
+                      borderRadius: 0
                     }}
                   >
                     <Grid container spacing={4}>
@@ -206,8 +194,11 @@ function Navbar({ footerRef }) {
                           {items.map((program, idx) => (
                             <Typography
                               key={idx}
-                              sx={{ py: 0.5, cursor: 'pointer', '&:hover': { textDecoration: 'underline' } }}
-                              onClick={() => handleAdmissionClick(program)}
+                              sx={{
+                                py: 0.5,
+                                cursor: 'pointer',
+                                '&:hover': { textDecoration: 'underline' }
+                              }}
                             >
                               {program}
                             </Typography>
@@ -219,34 +210,21 @@ function Navbar({ footerRef }) {
                 </Popper>
               </Box>
             </Box>
+
+            {/* Mobile Menu Button */}
+            <Box className="md:hidden">
+              <IconButton onClick={handleDrawerToggle}>
+                <MenuIcon className="text-blue-900" />
+              </IconButton>
+            </Box>
           </Toolbar>
         </Container>
       </AppBar>
 
-      {/* Dropdown Content Below Nav */}
-      {selectedFaculty && (
-        <Box className="p-6 bg-blue-100 text-blue-900">
-          <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2 }}>
-            {selectedFaculty}
-          </Typography>
-          <Typography>
-            This is detailed information about <strong>{selectedFaculty}</strong>. You can customize this section to show
-            real data, course offerings, faculty members, or any other relevant content.
-          </Typography>
-        </Box>
-      )}
-
-      {selectedAdmission && (
-        <Box className="p-6 bg-blue-100 text-blue-900">
-          <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2 }}>
-            {selectedAdmission}
-          </Typography>
-          <Typography>
-            You selected <strong>{selectedAdmission}</strong> from the Admissions dropdown. Here, you can display application
-            instructions, eligibility criteria, fee details, etc.
-          </Typography>
-        </Box>
-      )}
+      {/* Mobile Drawer */}
+      <Drawer anchor="right" open={mobileOpen} onClose={handleDrawerToggle}>
+        {drawerContent}
+      </Drawer>
     </>
   );
 }
