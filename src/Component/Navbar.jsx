@@ -1,5 +1,7 @@
 import React, { useState } from 'react'; 
 import { Link, useLocation } from 'react-router-dom';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Grow from '@mui/material/Grow';
 import {
   AppBar,
   Toolbar,
@@ -161,24 +163,27 @@ function Navbar({ footerRef }) {
                   >
                     <Grid container spacing={1}>
                       {CoursesDropdown.map((faculty, idx) => (
-                        <Grid item xs={12} sm={6} key={idx}>
-                          <Typography
-                            sx={{
-                              fontSize: '0.85rem',
-                              cursor: 'pointer',
-                              px: 1,
-                              py: 0.5,
-                              borderRadius: 1,
-                              '&:hover': {
-                                backgroundColor: '#BFDBFE',
-                                transform: 'scale(1.05)',
-                                transition: 'all 0.2s ease-in-out',
-                              },
-                            }}
+                       <Link
+                            to={`/courses/${faculty.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`}
+                            style={{ textDecoration: 'none' }}
                           >
-                            {faculty}
-                          </Typography>
-                        </Grid>
+                            <Typography
+                              sx={{
+                                fontSize: '0.85rem',
+                                cursor: 'pointer',
+                                px: 1,
+                                py: 0.5,
+                                borderRadius: 1,
+                                '&:hover': {
+                                  backgroundColor: '#BFDBFE',
+                                  transform: 'scale(1.05)',
+                                  transition: 'all 0.2s ease-in-out',
+                                },
+                              }}
+                            >
+                              {faculty}
+                            </Typography>
+                       </Link>
                       ))}
                     </Grid>
                   </Paper>
@@ -213,25 +218,28 @@ function Navbar({ footerRef }) {
                     <Grid container spacing={2}>
                       {Object.entries(admissionDropdown).flatMap(([section, items], i) => (
                         items.map((program, idx) => (
-                          <Grid item xs={12} sm={6} md={4} key={`${i}-${idx}`}>
-                            <Typography
-                              sx={{
-                                fontSize: '0.85rem',
-                                cursor: 'pointer',
-                                px: 1,
-                                py: 0.5,
-                                borderRadius: 1,
-                                fontWeight: '500',
-                                '&:hover': {
-                                  backgroundColor: '#BFDBFE',
-                                  transform: 'scale(1.05)',
-                                  transition: 'all 0.2s ease-in-out',
-                                },
-                              }}
-                            >
-                              {program}
-                            </Typography>
-                          </Grid>
+                          <Link
+                                to={`/admissions/${program.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`}
+                                style={{ textDecoration: 'none' }}
+                              >
+                                <Typography
+                                  sx={{
+                                    fontSize: '0.85rem',
+                                    cursor: 'pointer',
+                                    px: 1,
+                                    py: 0.5,
+                                    borderRadius: 1,
+                                    fontWeight: '500',
+                                    '&:hover': {
+                                      backgroundColor: '#BFDBFE',
+                                      transform: 'scale(1.05)',
+                                      transition: 'all 0.2s ease-in-out',
+                                    },
+                                  }}
+                                >
+                                  {program}
+                                </Typography>
+                          </Link>
                         ))
                       ))}
                     </Grid>
