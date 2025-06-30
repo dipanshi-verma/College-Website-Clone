@@ -63,7 +63,7 @@ parul-university/
 
 ## 🧭 Routes
 
-| Route       | Component       | Description                               |
+| Route       | Component        | Description                               |
 |-------------|------------------|-------------------------------------------|
 | `/`         | `Home.jsx`       | Welcome section with slider & FAQs        |
 | `/about`    | `AboutUs.jsx`    | University info, leadership, facilities   |
@@ -78,5 +78,7 @@ parul-university/
 - Custom success alert using SweetAlert2
 - Integrated scroll behavior on "Contact Us" click
 
+
+##Live link : https://institute-clone.vercel.app/
 
 
