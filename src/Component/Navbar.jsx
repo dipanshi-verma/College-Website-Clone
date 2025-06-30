@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; 
 import { Link, useLocation } from 'react-router-dom';
 import {
   AppBar,
@@ -101,7 +101,6 @@ function Navbar({ footerRef }) {
       <AppBar position="static" className="!bg-blue-200 shadow-sm z-[1200]">
         <Container maxWidth="xl">
           <Toolbar className="flex justify-between">
-            {/* Logo */}
             <Box className="flex items-center gap-3">
               <img
                 src="https://pbs.twimg.com/media/GcfFXk-XkAAMdwf.jpg"
@@ -113,14 +112,12 @@ function Navbar({ footerRef }) {
               </Typography>
             </Box>
 
-            {/* Desktop Nav */}
             <Box className="hidden md:flex gap-6 items-center">
               {navItems.map((item) => (
                 <Link
                   key={item.label}
                   to={item.path}
-                  className={`font-semibold text-blue-900 border-b-4 ${location.pathname === item.path ? 'border-yellow-400' : 'border-transparent'
-                    } hover:border-blue-400 transition px-2 py-1`}
+                  className={`font-semibold text-blue-900 border-b-4 ${location.pathname === item.path ? 'border-yellow-400' : 'border-transparent'} hover:border-blue-400 transition px-2 py-1`}
                 >
                   {item.label}
                 </Link>
@@ -138,10 +135,7 @@ function Navbar({ footerRef }) {
               </Button>
 
               {/* Courses Dropdown */}
-              <Box
-                onMouseEnter={(e) => setAnchorFaculty(e.currentTarget)}
-                onMouseLeave={() => setAnchorFaculty(null)}
-              >
+              <Box onMouseEnter={(e) => setAnchorFaculty(e.currentTarget)} onMouseLeave={() => setAnchorFaculty(null)}>
                 <Button
                   sx={{
                     fontWeight: 'bold',
@@ -153,32 +147,33 @@ function Navbar({ footerRef }) {
                 >
                   Courses
                 </Button>
-                <Popper
-                  open={Boolean(anchorFaculty)}
-                  anchorEl={anchorFaculty}
-                  placement="bottom-start"
-                  disablePortal={false}
-                  modifiers={[{ name: 'zIndex', enabled: true }]}
-                >
+                <Popper open={Boolean(anchorFaculty)} anchorEl={anchorFaculty} placement="bottom-start">
                   <Paper
                     sx={{
                       zIndex: 1300,
                       bgcolor: 'rgba(219, 234, 254, 0.95)',
                       backdropFilter: 'blur(6px)',
                       color: '#1D4ED8',
-                      width: '100vw',
-                      left: 0,
-                      p: 3,
-                      borderRadius: 0,
+                      width: 400,
+                      p: 2,
+                      borderRadius: 2,
                     }}
                   >
-                    <Grid container spacing={2}>
+                    <Grid container spacing={1}>
                       {CoursesDropdown.map((faculty, idx) => (
-                        <Grid item xs={12} sm={6} md={4} key={idx}>
+                        <Grid item xs={12} sm={6} key={idx}>
                           <Typography
                             sx={{
+                              fontSize: '0.85rem',
                               cursor: 'pointer',
-                              '&:hover': { textDecoration: 'underline' },
+                              px: 1,
+                              py: 0.5,
+                              borderRadius: 1,
+                              '&:hover': {
+                                backgroundColor: '#BFDBFE',
+                                transform: 'scale(1.05)',
+                                transition: 'all 0.2s ease-in-out',
+                              },
                             }}
                           >
                             {faculty}
@@ -191,10 +186,7 @@ function Navbar({ footerRef }) {
               </Box>
 
               {/* Admissions Dropdown */}
-              <Box
-                onMouseEnter={(e) => setAnchorAdmission(e.currentTarget)}
-                onMouseLeave={() => setAnchorAdmission(null)}
-              >
+              <Box onMouseEnter={(e) => setAnchorAdmission(e.currentTarget)} onMouseLeave={() => setAnchorAdmission(null)}>
                 <Button
                   sx={{
                     fontWeight: 'bold',
@@ -206,44 +198,41 @@ function Navbar({ footerRef }) {
                 >
                   Admissions
                 </Button>
-                <Popper
-                  open={Boolean(anchorAdmission)}
-                  anchorEl={anchorAdmission}
-                  placement="bottom-start"
-                  disablePortal={false}
-                  modifiers={[{ name: 'zIndex', enabled: true }]}
-                >
+                <Popper open={Boolean(anchorAdmission)} anchorEl={anchorAdmission} placement="bottom-start">
                   <Paper
                     sx={{
                       zIndex: 1300,
                       bgcolor: 'rgba(219, 234, 254, 0.95)',
                       backdropFilter: 'blur(6px)',
                       color: '#1D4ED8',
-                      width: '100vw',
-                      left: 0,
-                      p: 3,
-                      borderRadius: 0,
+                      width: 500,
+                      p: 2,
+                      borderRadius: 2,
                     }}
                   >
-                    <Grid container spacing={4}>
-                      {Object.entries(admissionDropdown).map(([section, items], i) => (
-                        <Grid item xs={12} sm={6} md={3} key={i}>
-                          <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
-                            {section}
-                          </Typography>
-                          {items.map((program, idx) => (
+                    <Grid container spacing={2}>
+                      {Object.entries(admissionDropdown).flatMap(([section, items], i) => (
+                        items.map((program, idx) => (
+                          <Grid item xs={12} sm={6} md={4} key={`${i}-${idx}`}>
                             <Typography
-                              key={idx}
                               sx={{
-                                py: 0.5,
+                                fontSize: '0.85rem',
                                 cursor: 'pointer',
-                                '&:hover': { textDecoration: 'underline' },
+                                px: 1,
+                                py: 0.5,
+                                borderRadius: 1,
+                                fontWeight: '500',
+                                '&:hover': {
+                                  backgroundColor: '#BFDBFE',
+                                  transform: 'scale(1.05)',
+                                  transition: 'all 0.2s ease-in-out',
+                                },
                               }}
                             >
                               {program}
                             </Typography>
-                          ))}
-                        </Grid>
+                          </Grid>
+                        ))
                       ))}
                     </Grid>
                   </Paper>
@@ -251,7 +240,6 @@ function Navbar({ footerRef }) {
               </Box>
             </Box>
 
-            {/* Mobile Menu Button */}
             <Box className="md:hidden">
               <IconButton onClick={handleDrawerToggle}>
                 <MenuIcon className="text-blue-900" />
@@ -261,7 +249,6 @@ function Navbar({ footerRef }) {
         </Container>
       </AppBar>
 
-      {/* Mobile Drawer */}
       <Drawer anchor="right" open={mobileOpen} onClose={handleDrawerToggle}>
         {drawerContent}
       </Drawer>
