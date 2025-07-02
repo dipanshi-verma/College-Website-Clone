@@ -30,12 +30,12 @@ const testimonials = [
     image: "https://randomuser.me/api/portraits/women/15.jpg",
   },
   {
-    name: "Aarav Mehta",
+    name: "Andrew Smith",
     quote: "The technical exposure I got here helped me land a job in my dream company.",
     image: "https://randomuser.me/api/portraits/men/21.jpg",
   },
   {
-    name: "Sneha Joshi",
+    name: "Nillson Warmth",
     quote: "The support I received during placements was truly unmatched.",
     image: "https://randomuser.me/api/portraits/women/44.jpg",
   },
