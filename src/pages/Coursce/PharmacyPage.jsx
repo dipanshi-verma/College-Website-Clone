@@ -7,6 +7,7 @@ const pageStyle = {
   padding: '40px 20px',
   fontFamily: 'Segoe UI, sans-serif',
 };
+
 const headingStyle = {
   textAlign: 'center',
   color: '#2e7d32',
@@ -14,12 +15,76 @@ const headingStyle = {
   fontWeight: 'bold',
   marginBottom: '30px',
 };
+
+const infoBox = {
+  maxWidth: '850px',
+  margin: '0 auto 40px auto',
+  backgroundColor: '#ffffff',
+  padding: '30px',
+  borderRadius: '12px',
+  border: '1px solid #b2dfdb',
+  boxShadow: '0 4px 12px rgba(0, 150, 136, 0.1)',
+  color: '#1b5e20',
+  lineHeight: '1.7',
+};
+
+const listStyle = {
+  paddingLeft: '20px',
+};
+
+const imageStyle = {
+  display: 'block',
+  margin: '0 auto 30px auto',
+  maxWidth: '420px',
+  width: '100%',
+  borderRadius: '12px',
+  boxShadow: '0 2px 8px rgba(0,150,136,0.10)'
+};
+
 const PharmacyPage = () => {
   return (
     <div style={pageStyle}>
       <h1 style={headingStyle}>Faculty of Pharmacy - Course Form</h1>
+        {/* 📸 Image Section */}
+      <img src="https://pimsr.paruluniversity.ac.in/wp-content/uploads/2024/02/Parul-Institute-of-Medical-Sciences-Research-Vadodara-Gujarat-2.webp" style={imageStyle} />
+
+
+      <div style={infoBox}>
+        <p>
+          The <strong>Faculty of Pharmacy</strong> focuses on the discovery, development, and responsible use of medications.
+          With modern labs and clinical exposure, we prepare students for a dynamic and vital profession in healthcare and pharmaceuticals.
+        </p>
+
+        <h3>💊 Popular Pharmacy Courses:</h3>
+        <ul style={listStyle}>
+          <li><strong>D. Pharm (Diploma in Pharmacy)</strong> – 2-year entry-level course covering pharmaceutical science fundamentals.</li>
+          <li><strong>B. Pharm (Bachelor of Pharmacy)</strong> – 4-year degree focusing on drug formulation, manufacturing, and patient care.</li>
+          <li><strong>M. Pharm (Master of Pharmacy)</strong> – 2-year specialization in fields like Pharmaceutics, Pharmacology, or Clinical Pharmacy.</li>
+          <li><strong>Pharm.D (Doctor of Pharmacy)</strong> – 6-year professional doctoral program for clinical practice.</li>
+          <li><strong>Ph.D. in Pharmaceutical Sciences</strong> – Advanced research-oriented program for drug innovation and development.</li>
+        </ul>
+
+        <h3>🔬 Career Opportunities:</h3>
+        <ul style={listStyle}>
+          <li>Clinical Pharmacist / Hospital Pharmacist</li>
+          <li>Pharmaceutical Research Scientist</li>
+          <li>Drug Inspector / Quality Control Analyst</li>
+          <li>Regulatory Affairs Officer</li>
+          <li>Academician / Medical Writer</li>
+        </ul>
+
+        <h3>🌿 Why Choose Our Faculty of Pharmacy?</h3>
+        <ul style={listStyle}>
+          <li>Modern laboratories with advanced instrumentation</li>
+          <li>Focus on clinical, industrial, and regulatory training</li>
+          <li>Experienced faculty and industry tie-ups</li>
+          <li>Strong placement support and career counseling</li>
+        </ul>
+      </div>
+
       <CourseForm facultyName="Faculty of Pharmacy" />
     </div>
   );
 };
+
 export default PharmacyPage;
