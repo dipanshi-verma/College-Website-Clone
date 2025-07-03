@@ -1,7 +1,5 @@
-import React, { useState } from 'react'; 
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Grow from '@mui/material/Grow';
 import {
   AppBar,
   Toolbar,
@@ -20,6 +18,7 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 const navItems = [
   { label: 'Home', path: '/' },
@@ -137,91 +136,37 @@ function Navbar({ footerRef }) {
               </Button>
 
               {/* Courses Dropdown */}
-              <Box onMouseEnter={(e) => setAnchorFaculty(e.currentTarget)} onMouseLeave={() => setAnchorFaculty(null)}>
-                <Button
-                  sx={{
-                    fontWeight: 'bold',
-                    color: '#1D4ED8',
-                    borderBottom: anchorFaculty ? '4px solid #FACC15' : '4px solid transparent',
-                    '&:hover': { borderBottom: '4px solid #60A5FA' },
-                    borderRadius: 0,
-                  }}
-                >
-                  Courses
-                </Button>
-                <Popper open={Boolean(anchorFaculty)} anchorEl={anchorFaculty} placement="bottom-start">
-                  <Paper
+              <ClickAwayListener onClickAway={() => setAnchorFaculty(null)}>
+                <Box onMouseEnter={(e) => setAnchorFaculty(e.currentTarget)} onMouseLeave={() => setAnchorFaculty(null)}>
+                  <Button
                     sx={{
-                      zIndex: 1300,
-                      bgcolor: 'rgba(219, 234, 254, 0.95)',
-                      backdropFilter: 'blur(6px)',
+                      fontWeight: 'bold',
                       color: '#1D4ED8',
-                      width: 400,
-                      p: 2,
-                      borderRadius: 2,
+                      borderBottom: anchorFaculty ? '4px solid #FACC15' : '4px solid transparent',
+                      '&:hover': { borderBottom: '4px solid #60A5FA' },
+                      borderRadius: 0,
                     }}
                   >
-                    <Grid container spacing={1}>
-                      {CoursesDropdown.map((faculty, idx) => (
-                       <Link
-                            to={`/courses/${faculty.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`}
-                            style={{ textDecoration: 'none' }}
-                          >
-                            <Typography
-                              sx={{
-                                fontSize: '0.85rem',
-                                cursor: 'pointer',
-                                px: 1,
-                                py: 0.5,
-                                borderRadius: 1,
-                                '&:hover': {
-                                  backgroundColor: '#BFDBFE',
-                                  transform: 'scale(1.05)',
-                                  transition: 'all 0.2s ease-in-out',
-                                },
-                              }}
-                            >
-                              {faculty}
-                            </Typography>
-                       </Link>
-                      ))}
-                    </Grid>
-                  </Paper>
-                </Popper>
-              </Box>
-
-              {/* Admissions Dropdown */}
-              <Box onMouseEnter={(e) => setAnchorAdmission(e.currentTarget)} onMouseLeave={() => setAnchorAdmission(null)}>
-                <Button
-                  sx={{
-                    fontWeight: 'bold',
-                    color: '#1D4ED8',
-                    borderBottom: anchorAdmission ? '4px solid #FACC15' : '4px solid transparent',
-                    '&:hover': { borderBottom: '4px solid #60A5FA' },
-                    borderRadius: 0,
-                  }}
-                >
-                  Admissions
-                </Button>
-                <Popper open={Boolean(anchorAdmission)} anchorEl={anchorAdmission} placement="bottom-start">
-                  <Paper
-                    sx={{
-                      zIndex: 1300,
-                      bgcolor: 'rgba(219, 234, 254, 0.95)',
-                      backdropFilter: 'blur(6px)',
-                      color: '#1D4ED8',
-                      width: 500,
-                      p: 2,
-                      borderRadius: 2,
-                    }}
-                  >
-                    <Grid container spacing={2}>
-                      {Object.entries(admissionDropdown).flatMap(([section, items], i) => (
-                        items.map((program, idx) => (
-                          <Link
-                                to={`/admissions/${program.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`}
-                                style={{ textDecoration: 'none' }}
-                              >
+                    Courses
+                  </Button>
+                  <Popper open={Boolean(anchorFaculty)} anchorEl={anchorFaculty} placement="bottom-start">
+                    <Paper
+                      sx={{
+                        zIndex: 1300,
+                        bgcolor: 'rgba(219, 234, 254, 0.95)',
+                        backdropFilter: 'blur(6px)',
+                        color: '#1D4ED8',
+                        width: 400,
+                        p: 2,
+                        borderRadius: 2,
+                      }}
+                    >
+                      <Grid container spacing={1}>
+                        {CoursesDropdown.map((faculty, idx) => {
+                          const slug = faculty.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+                          return (
+                            <Grid item xs={12} key={idx}>
+                              <Link to={`/courses/${slug}`} style={{ textDecoration: 'none' }}>
                                 <Typography
                                   sx={{
                                     fontSize: '0.85rem',
@@ -229,7 +174,6 @@ function Navbar({ footerRef }) {
                                     px: 1,
                                     py: 0.5,
                                     borderRadius: 1,
-                                    fontWeight: '500',
                                     '&:hover': {
                                       backgroundColor: '#BFDBFE',
                                       transform: 'scale(1.05)',
@@ -237,17 +181,81 @@ function Navbar({ footerRef }) {
                                     },
                                   }}
                                 >
-                                  {program}
+                                  {faculty}
                                 </Typography>
-                          </Link>
-                        ))
-                      ))}
-                    </Grid>
-                  </Paper>
-                </Popper>
-              </Box>
+                              </Link>
+                            </Grid>
+                          );
+                        })}
+                      </Grid>
+                    </Paper>
+                  </Popper>
+                </Box>
+              </ClickAwayListener>
+
+              {/* Admissions Dropdown */}
+              <ClickAwayListener onClickAway={() => setAnchorAdmission(null)}>
+                <Box onMouseEnter={(e) => setAnchorAdmission(e.currentTarget)} onMouseLeave={() => setAnchorAdmission(null)}>
+                  <Button
+                    sx={{
+                      fontWeight: 'bold',
+                      color: '#1D4ED8',
+                      borderBottom: anchorAdmission ? '4px solid #FACC15' : '4px solid transparent',
+                      '&:hover': { borderBottom: '4px solid #60A5FA' },
+                      borderRadius: 0,
+                    }}
+                  >
+                    Admissions
+                  </Button>
+                  <Popper open={Boolean(anchorAdmission)} anchorEl={anchorAdmission} placement="bottom-start">
+                    <Paper
+                      sx={{
+                        zIndex: 1300,
+                        bgcolor: 'rgba(219, 234, 254, 0.95)',
+                        backdropFilter: 'blur(6px)',
+                        color: '#1D4ED8',
+                        width: 500,
+                        p: 2,
+                        borderRadius: 2,
+                      }}
+                    >
+                      <Grid container spacing={2}>
+                        {Object.entries(admissionDropdown).flatMap(([section, items]) =>
+                          items.map((program, idx) => {
+                            const slug = program.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+                            return (
+                              <Grid item xs={6} key={`${section}-${idx}`}>
+                                <Link to={`/admissions/${slug}`} style={{ textDecoration: 'none' }}>
+                                  <Typography
+                                    sx={{
+                                      fontSize: '0.85rem',
+                                      cursor: 'pointer',
+                                      px: 1,
+                                      py: 0.5,
+                                      borderRadius: 1,
+                                      fontWeight: '500',
+                                      '&:hover': {
+                                        backgroundColor: '#BFDBFE',
+                                        transform: 'scale(1.05)',
+                                        transition: 'all 0.2s ease-in-out',
+                                      },
+                                    }}
+                                  >
+                                    {program}
+                                  </Typography>
+                                </Link>
+                              </Grid>
+                            );
+                          })
+                        )}
+                      </Grid>
+                    </Paper>
+                  </Popper>
+                </Box>
+              </ClickAwayListener>
             </Box>
 
+            {/* Mobile Menu */}
             <Box className="md:hidden">
               <IconButton onClick={handleDrawerToggle}>
                 <MenuIcon className="text-blue-900" />

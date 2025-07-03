@@ -1,0 +1,25 @@
+import React from 'react';
+import CourseForm from '../../Component/CourseForm';
+
+const pageStyle = {
+  background: 'linear-gradient(to right, #fff0f5, #ffe6fa)',
+  minHeight: '100vh',
+  padding: '40px 20px',
+  fontFamily: 'Georgia, "Times New Roman", serif',
+};
+const headingStyle = {
+  textAlign: 'center',
+  color: '#993366',
+  fontSize: '32px',
+  fontWeight: 'bold',
+  marginBottom: '30px',
+};
+const FineArtsPage = () => {
+  return (
+    <div style={pageStyle}>
+      <h1 style={headingStyle}>Faculty of Fine Arts - Course Form</h1>
+      <CourseForm facultyName="Faculty of Fine Arts" />
+    </div>
+  );
+};
+export default FineArtsPage;
