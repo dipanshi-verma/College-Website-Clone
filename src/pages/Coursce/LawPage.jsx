@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CourseForm from '../../Component/CourseForm';
 
 const pageStyle = {
@@ -6,6 +6,7 @@ const pageStyle = {
   minHeight: '100vh',
   padding: '40px 20px',
   fontFamily: 'Georgia, serif',
+  overflowX: 'hidden',
 };
 
 const headingStyle = {
@@ -16,6 +17,7 @@ const headingStyle = {
   marginBottom: '30px',
   textTransform: 'uppercase',
   letterSpacing: '1px',
+  animation: 'fadeDown 1s ease-out',
 };
 
 const infoBox = {
@@ -40,18 +42,63 @@ const imageStyle = {
   maxWidth: '420px',
   width: '100%',
   borderRadius: '12px',
-  boxShadow: '0 2px 8px rgba(0,0,0,0.10)'
+  boxShadow: '0 2px 8px rgba(0,0,0,0.10)',
+  animation: 'zoomIn 1.2s ease-in',
 };
 
 const LawPage = () => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    const elements = document.querySelectorAll('.fade-trigger');
+    elements.forEach((el) => observer.observe(el));
+    return () => elements.forEach((el) => observer.unobserve(el));
+  }, []);
+
   return (
     <div style={pageStyle}>
+      <style>{`
+        @keyframes fadeDown {
+          from { opacity: 0; transform: translateY(-30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes zoomIn {
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
+        }
+
+        .fade-trigger {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: all 0.8s ease;
+        }
+
+        .fade-in {
+          opacity: 1 !important;
+          transform: translateY(0) scale(1) !important;
+        }
+      `}</style>
+
       <h1 style={headingStyle}>Faculty of Law - Course Form</h1>
-        {/* 📸 Image Section */}
-      <img src="https://paruluniversity.ac.in/app/20200122/images/faculty/2679221.jpg" style={imageStyle} />
 
+      {/* 📸 Image */}
+      <img
+        src="https://paruluniversity.ac.in/app/20200122/images/faculty/2679221.jpg"
+        alt="Faculty of Law"
+        style={imageStyle}
+      />
 
-      <div style={infoBox}>
+      <div className="fade-trigger" style={infoBox}>
         <p>
           The <strong>Faculty of Law</strong> offers a robust legal education combining academic theory with practical exposure.
           Our curriculum is designed to build strong analytical, reasoning, and advocacy skills, preparing students for diverse careers in the legal field.
@@ -84,7 +131,9 @@ const LawPage = () => {
         </ul>
       </div>
 
-      <CourseForm facultyName="Faculty of Law" />
+      <div className="fade-trigger" style={{ ...infoBox, marginTop: '30px' }}>
+        <CourseForm facultyName="Faculty of Law" />
+      </div>
     </div>
   );
 };

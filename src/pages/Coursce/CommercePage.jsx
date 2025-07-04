@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CourseForm from '../../Component/CourseForm';
 
 const pageStyle = {
-  background: 'linear-gradient(to right, #f0f8ff, #e6f7ff)',
+  backgroundAttachment: 'fixed',
+  backgroundImage: 'linear-gradient(to right, #e6f7ff, #f0f8ff)',
   minHeight: '100vh',
   padding: '40px 20px',
   fontFamily: 'Segoe UI, sans-serif',
+  overflowX: 'hidden',
 };
 
 const headingStyle = {
@@ -14,7 +16,8 @@ const headingStyle = {
   fontSize: '36px',
   fontWeight: 'bold',
   marginBottom: '30px',
-  textShadow: '1px 1px 2px #ccc',
+  textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
+  animation: 'fadeDown 1s ease-out',
 };
 
 const sectionStyle = {
@@ -23,9 +26,10 @@ const sectionStyle = {
   background: '#ffffff',
   padding: '30px',
   borderRadius: '12px',
-  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+  boxShadow: '0 10px 24px rgba(0, 0, 0, 0.1)',
   color: '#333',
   lineHeight: '1.7',
+  animation: 'fadeUp 1.2s ease-in',
 };
 
 const listStyle = {
@@ -37,18 +41,67 @@ const imageStyle = {
   margin: '0 auto 30px auto',
   maxWidth: '400px',
   width: '100%',
-  borderRadius: '10px',
-  boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
+  borderRadius: '12px',
+  boxShadow: '0 6px 16px rgba(0,0,0,0.15)',
+  animation: 'zoomIn 1.2s ease',
 };
 
 const CommercePage = () => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    const elements = document.querySelectorAll('.fade-trigger');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => elements.forEach((el) => observer.unobserve(el));
+  }, []);
+
   return (
     <div style={pageStyle}>
-      <h1 style={headingStyle}>Faculty of Commerce - Course Form</h1>
-        {/* 📸 Image Section */}
-      <img src="https://paruluniversity.ac.in/app/20200218/images/faculty/500015Commerce.jpg" alt="Faculty of Commerce" style={imageStyle} />
+      <style>
+        {`
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeDown {
+          from { opacity: 0; transform: translateY(-20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes zoomIn {
+          from { opacity: 0; transform: scale(0.9); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        .fade-in {
+          opacity: 1 !important;
+          transform: translateY(0) scale(1) !important;
+        }
+        .fade-trigger {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: all 1s ease;
+        }
+      `}
+      </style>
 
-      <div style={sectionStyle}>
+      <h1 style={headingStyle}>Faculty of Commerce - Course Form</h1>
+
+      <img
+        src="https://paruluniversity.ac.in/app/20200218/images/faculty/500015Commerce.jpg"
+        alt="Faculty of Commerce"
+        style={imageStyle}
+      />
+
+      <div style={sectionStyle} className="fade-trigger">
         <p>
           The <strong>Faculty of Commerce</strong> is dedicated to nurturing future business leaders,
           economists, and finance professionals. Our curriculum is designed to meet modern business
@@ -82,7 +135,9 @@ const CommercePage = () => {
         </ul>
       </div>
 
-      <CourseForm facultyName="Faculty of Commerce" />
+      <div className="fade-trigger" style={{ animationDelay: '0.5s' }}>
+        <CourseForm facultyName="Faculty of Commerce" />
+      </div>
     </div>
   );
 };

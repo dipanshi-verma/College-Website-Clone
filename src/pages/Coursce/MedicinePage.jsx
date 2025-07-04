@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CourseForm from '../../Component/CourseForm';
 
 const pageStyle = {
@@ -6,6 +6,7 @@ const pageStyle = {
   minHeight: '100vh',
   padding: '40px 20px',
   fontFamily: 'Segoe UI, sans-serif',
+  overflowX: 'hidden',
 };
 
 const headingStyle = {
@@ -14,6 +15,9 @@ const headingStyle = {
   fontSize: '32px',
   fontWeight: 'bold',
   marginBottom: '30px',
+  textTransform: 'uppercase',
+  letterSpacing: '1px',
+  animation: 'fadeDown 1s ease-out',
 };
 
 const infoBox = {
@@ -38,18 +42,62 @@ const imageStyle = {
   maxWidth: '420px',
   width: '100%',
   borderRadius: '12px',
-  boxShadow: '0 2px 8px rgba(0,102,102,0.10)'
+  boxShadow: '0 2px 8px rgba(0,102,102,0.10)',
+  animation: 'zoomIn 1.2s ease-in',
 };
 
 const MedicinePage = () => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    const elements = document.querySelectorAll('.fade-trigger');
+    elements.forEach(el => observer.observe(el));
+    return () => elements.forEach(el => observer.unobserve(el));
+  }, []);
+
   return (
     <div style={pageStyle}>
+      <style>{`
+        @keyframes fadeDown {
+          from { opacity: 0; transform: translateY(-30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes zoomIn {
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
+        }
+
+        .fade-trigger {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: all 0.8s ease;
+        }
+
+        .fade-in {
+          opacity: 1 !important;
+          transform: translateY(0) !important;
+        }
+      `}</style>
+
       <h1 style={headingStyle}>Faculty of Medicine - Course Form</h1>
-        {/* 📸 Image Section */}
-      <img src="https://pimsr.paruluniversity.ac.in/wp-content/uploads/2024/02/Parul-Institute-of-Medical-Sciences-Research-Vadodara-Gujarat-2.webp" style={imageStyle} />
 
+      <img
+        src="https://pimsr.paruluniversity.ac.in/wp-content/uploads/2024/02/Parul-Institute-of-Medical-Sciences-Research-Vadodara-Gujarat-2.webp"
+        alt="Faculty of Medicine"
+        style={imageStyle}
+      />
 
-      <div style={infoBox}>
+      <div className="fade-trigger" style={infoBox}>
         <p>
           The <strong>Faculty of Medicine</strong> is committed to producing skilled healthcare professionals
           and researchers through world-class medical education, practical training, and ethical clinical practice.
@@ -58,11 +106,11 @@ const MedicinePage = () => {
 
         <h3>🩺 Popular Medical Courses:</h3>
         <ul style={listStyle}>
-          <li><strong>MBBS (Bachelor of Medicine and Bachelor of Surgery)</strong> – A 5.5-year program including internship, focusing on foundational and clinical knowledge in general medicine and surgery.</li>
-          <li><strong>BDS (Bachelor of Dental Surgery)</strong> – A 5-year undergraduate course in dental sciences and oral healthcare.</li>
-          <li><strong>BPT (Bachelor of Physiotherapy)</strong> – A 4.5-year program focused on physical rehabilitation and therapy techniques.</li>
+          <li><strong>MBBS</strong> – A 5.5-year program including internship, focusing on foundational and clinical knowledge in general medicine and surgery.</li>
+          <li><strong>BDS</strong> – A 5-year undergraduate course in dental sciences and oral healthcare.</li>
+          <li><strong>BPT</strong> – A 4.5-year program focused on physical rehabilitation and therapy techniques.</li>
           <li><strong>MD / MS</strong> – Postgraduate degrees in specialized fields like Internal Medicine, Surgery, Pediatrics, Radiology, Psychiatry, and more.</li>
-          <li><strong>Ph.D. in Medical Sciences</strong> – Research-intensive doctorate for those aiming at academic and scientific innovation in medicine.</li>
+          <li><strong>Ph.D. in Medical Sciences</strong> – Research-intensive doctorate for academic and scientific innovation.</li>
         </ul>
 
         <h3>🔬 Career Opportunities:</h3>
@@ -83,7 +131,9 @@ const MedicinePage = () => {
         </ul>
       </div>
 
-      <CourseForm facultyName="Faculty of Medicine" />
+      <div className="fade-trigger" style={{ ...infoBox, marginTop: '30px' }}>
+        <CourseForm facultyName="Faculty of Medicine" />
+      </div>
     </div>
   );
 };

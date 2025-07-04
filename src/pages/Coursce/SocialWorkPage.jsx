@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CourseForm from '../../Component/CourseForm';
 
 const pageStyle = {
@@ -6,6 +6,7 @@ const pageStyle = {
   minHeight: '100vh',
   padding: '40px 20px',
   fontFamily: '"Segoe UI", sans-serif',
+  overflowX: 'hidden',
 };
 
 const headingStyle = {
@@ -14,6 +15,7 @@ const headingStyle = {
   fontSize: '32px',
   fontWeight: 'bold',
   marginBottom: '30px',
+  animation: 'fadeDown 1s ease-out',
 };
 
 const infoBox = {
@@ -38,18 +40,62 @@ const imageStyle = {
   maxWidth: '420px',
   width: '100%',
   borderRadius: '12px',
-  boxShadow: '0 2px 8px rgba(204,102,0,0.10)'
+  boxShadow: '0 2px 8px rgba(204,102,0,0.10)',
+  animation: 'zoomIn 1s ease',
 };
 
 const SocialWorkPage = () => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    const fadeElements = document.querySelectorAll('.fade-trigger');
+    fadeElements.forEach(el => observer.observe(el));
+    return () => fadeElements.forEach(el => observer.unobserve(el));
+  }, []);
+
   return (
     <div style={pageStyle}>
+      <style>{`
+        @keyframes fadeDown {
+          from { opacity: 0; transform: translateY(-20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes zoomIn {
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
+        }
+
+        .fade-trigger {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: all 0.7s ease;
+        }
+
+        .fade-in {
+          opacity: 1 !important;
+          transform: translateY(0) !important;
+        }
+      `}</style>
+
       <h1 style={headingStyle}>Faculty of Social Work - Course Form</h1>
-        {/* 📸 Image Section */}
-      <img src="https://paruluniversity.ac.in/app/20200630/images/faculty/564375IMAGE%2014.jpg" style={imageStyle} />
 
+      <img
+        src="https://paruluniversity.ac.in/app/20200630/images/faculty/564375IMAGE%2014.jpg"
+        style={imageStyle}
+        alt="Faculty of Social Work"
+      />
 
-      <div style={infoBox}>
+      <div className="fade-trigger" style={infoBox}>
         <p>
           The <strong>Faculty of Social Work</strong> empowers students with knowledge and skills to promote
           social justice, empower communities, and improve the quality of life for individuals in need.
@@ -82,7 +128,9 @@ const SocialWorkPage = () => {
         </ul>
       </div>
 
-      <CourseForm facultyName="Faculty of Social Work" />
+      <div className="fade-trigger" style={{ ...infoBox, marginTop: '30px' }}>
+        <CourseForm facultyName="Faculty of Social Work" />
+      </div>
     </div>
   );
 };
