@@ -18,17 +18,22 @@ const headingStyle = {
   animation: 'fadeDown 1s ease-out',
 };
 
-const infoCardStyle = {
-  maxWidth: '850px',
+const sideBySideContainer = {
+  display: 'flex',
+  maxWidth: '900px',
   margin: '0 auto 40px auto',
-  backgroundColor: '#f7fbff',
-  padding: '30px',
-  borderRadius: '15px',
-  border: '1px solid #d0eaff',
-  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)',
+  gap: '40px',
+  alignItems: 'flex-start',
+};
+
+const infoCardStyle = {
+  flex: 1,
   lineHeight: '1.7',
   color: '#003049',
-  animation: 'fadeUp 1.2s ease-in',
+  backgroundColor: 'transparent', // Removed bg
+  border: 'none',                 // Removed border
+  boxShadow: 'none',             // Removed shadow
+  padding: 0,
 };
 
 const listStyle = {
@@ -36,12 +41,10 @@ const listStyle = {
 };
 
 const imageStyle = {
-  display: 'block',
-  margin: '0 auto 30px auto',
-  maxWidth: '420px',
+  flex: '0 0 420px',
   width: '100%',
   borderRadius: '12px',
-  boxShadow: '0 6px 16px rgba(0,0,0,0.1)',
+  boxShadow: 'none',   // Removed shadow for cleaner look
   animation: 'zoomIn 1.2s ease',
 };
 
@@ -91,43 +94,45 @@ const ITPage = () => {
 
       <h1 style={headingStyle}>Faculty of IT & Computer Science - Course Form</h1>
 
-      <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjM6c8D3K9vSiuHju4cD7BBMEsWTetDC8Adw&s"
-        alt="Faculty of IT"
-        style={imageStyle}
-      />
+      <div className="fade-trigger" style={sideBySideContainer}>
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjM6c8D3K9vSiuHju4cD7BBMEsWTetDC8Adw&s"
+          alt="Faculty of IT"
+          style={imageStyle}
+        />
 
-      <div style={infoCardStyle} className="fade-trigger">
-        <p>
-          The <strong>Faculty of IT & Computer Science</strong> provides cutting-edge programs aimed at developing technical, analytical,
-          and problem-solving skills. Our curriculum is aligned with current industry demands including AI, data science,
-          cybersecurity, full-stack development, and more.
-        </p>
+        <div style={infoCardStyle}>
+          <p>
+            The <strong>Faculty of IT & Computer Science</strong> provides cutting-edge programs aimed at developing technical, analytical,
+            and problem-solving skills. Our curriculum is aligned with current industry demands including AI, data science,
+            cybersecurity, full-stack development, and more.
+          </p>
 
-        <h3>🖥️ Popular Courses Offered:</h3>
-        <ul style={listStyle}>
-          <li>B.Sc. in Computer Science</li>
-          <li>BCA (Bachelor of Computer Applications)</li>
-          <li>M.Sc. in Data Science</li>
-          <li>PG Diploma in Cyber Security</li>
-          <li>Certificate Course in AI & Machine Learning</li>
-        </ul>
+          <h3>🖥️ Popular Courses Offered:</h3>
+          <ul style={listStyle}>
+            <li>B.Sc. in Computer Science</li>
+            <li>BCA (Bachelor of Computer Applications)</li>
+            <li>M.Sc. in Data Science</li>
+            <li>PG Diploma in Cyber Security</li>
+            <li>Certificate Course in AI & Machine Learning</li>
+          </ul>
 
-        <h3>📌 Eligibility:</h3>
-        <ul style={listStyle}>
-          <li>UG Programs: 10+2 with Mathematics</li>
-          <li>PG Programs: Graduation in Computer/IT-related discipline</li>
-          <li>Certifications: Open to all with basic tech interest</li>
-        </ul>
+          <h3>📌 Eligibility:</h3>
+          <ul style={listStyle}>
+            <li>UG Programs: 10+2 with Mathematics</li>
+            <li>PG Programs: Graduation in Computer/IT-related discipline</li>
+            <li>Certifications: Open to all with basic tech interest</li>
+          </ul>
 
-        <h3>💼 Career Opportunities:</h3>
-        <ul style={listStyle}>
-          <li>Software Developer / Full Stack Engineer</li>
-          <li>Data Scientist / Analyst</li>
-          <li>Cloud / DevOps Engineer</li>
-          <li>Cybersecurity Specialist</li>
-          <li>AI / Machine Learning Engineer</li>
-        </ul>
+          <h3>💼 Career Opportunities:</h3>
+          <ul style={listStyle}>
+            <li>Software Developer / Full Stack Engineer</li>
+            <li>Data Scientist / Analyst</li>
+            <li>Cloud / DevOps Engineer</li>
+            <li>Cybersecurity Specialist</li>
+            <li>AI / Machine Learning Engineer</li>
+          </ul>
+        </div>
       </div>
 
       <div className="fade-trigger" style={{ animationDelay: '0.4s' }}>

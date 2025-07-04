@@ -20,13 +20,31 @@ const headingStyle = {
   animation: 'fadeDown 1s ease-out',
 };
 
-const sectionStyle = {
-  maxWidth: '800px',
+const containerStyle = {
+  maxWidth: '1000px',
   margin: '0 auto 40px auto',
-  background: '#ffffff',
-  padding: '30px',
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  alignItems: 'flex-start',
+  justifyContent: 'center',
+  gap: '40px',
+};
+
+const imageStyle = {
+  flex: '0 0 400px',
+  width: '100%',
   borderRadius: '12px',
-  boxShadow: '0 10px 24px rgba(0, 0, 0, 0.1)',
+  animation: 'zoomIn 1.2s ease',
+  minWidth: '280px',
+};
+
+const infoStyle = {
+  flex: '1 1 400px',
+  padding: '0',
+  backgroundColor: 'transparent',
+  border: 'none',
+  boxShadow: 'none',
   color: '#333',
   lineHeight: '1.7',
   animation: 'fadeUp 1.2s ease-in',
@@ -34,16 +52,6 @@ const sectionStyle = {
 
 const listStyle = {
   paddingLeft: '20px',
-};
-
-const imageStyle = {
-  display: 'block',
-  margin: '0 auto 30px auto',
-  maxWidth: '400px',
-  width: '100%',
-  borderRadius: '12px',
-  boxShadow: '0 6px 16px rgba(0,0,0,0.15)',
-  animation: 'zoomIn 1.2s ease',
 };
 
 const CommercePage = () => {
@@ -90,52 +98,59 @@ const CommercePage = () => {
           transform: translateY(30px);
           transition: all 1s ease;
         }
+        @media (max-width: 768px) {
+          .responsive-container {
+            flex-direction: column !important;
+          }
+        }
       `}
       </style>
 
       <h1 style={headingStyle}>Faculty of Commerce - Course Form</h1>
 
-      <img
-        src="https://paruluniversity.ac.in/app/20200218/images/faculty/500015Commerce.jpg"
-        alt="Faculty of Commerce"
-        style={imageStyle}
-      />
+      <div className="fade-trigger responsive-container" style={containerStyle}>
+        <img
+          src="https://paruluniversity.ac.in/app/20200218/images/faculty/500015Commerce.jpg"
+          alt="Faculty of Commerce"
+          style={imageStyle}
+        />
 
-      <div style={sectionStyle} className="fade-trigger">
-        <p>
-          The <strong>Faculty of Commerce</strong> is dedicated to nurturing future business leaders,
-          economists, and finance professionals. Our curriculum is designed to meet modern business
-          standards and industry needs.
-        </p>
+        <div style={infoStyle}>
+          <p>
+            The <strong>Faculty of Commerce</strong> is dedicated to nurturing future business leaders,
+            economists, and finance professionals. Our curriculum is designed to meet modern business
+            standards and industry needs.
+          </p>
 
-        <h3>💼 Popular Courses Offered:</h3>
-        <ul style={listStyle}>
-          <li>B.Com (General)</li>
-          <li>B.Com (Honours)</li>
-          <li>BBA (Bachelor of Business Administration)</li>
-          <li>Master of Commerce (M.Com)</li>
-          <li>PG Diploma in Finance and Accounting</li>
-        </ul>
+          <h3>💼 Popular Courses Offered:</h3>
+          <ul style={listStyle}>
+            <li>B.Com (General)</li>
+            <li>B.Com (Honours)</li>
+            <li>BBA (Bachelor of Business Administration)</li>
+            <li>Master of Commerce (M.Com)</li>
+            <li>PG Diploma in Finance and Accounting</li>
+          </ul>
 
-        <h3>🎯 Career Opportunities:</h3>
-        <ul style={listStyle}>
-          <li>Chartered Accountant (CA)</li>
-          <li>Company Secretary (CS)</li>
-          <li>Financial Analyst</li>
-          <li>Banking & Insurance Professional</li>
-          <li>Tax Consultant</li>
-        </ul>
+          <h3>🎯 Career Opportunities:</h3>
+          <ul style={listStyle}>
+            <li>Chartered Accountant (CA)</li>
+            <li>Company Secretary (CS)</li>
+            <li>Financial Analyst</li>
+            <li>Banking & Insurance Professional</li>
+            <li>Tax Consultant</li>
+          </ul>
 
-        <h3>🌟 Why Choose Us?</h3>
-        <ul style={listStyle}>
-          <li>Experienced faculty and industry-focused curriculum</li>
-          <li>Workshops, internships, and placement support</li>
-          <li>Modern infrastructure and smart classrooms</li>
-          <li>Strong alumni network</li>
-        </ul>
+          <h3>🌟 Why Choose Us?</h3>
+          <ul style={listStyle}>
+            <li>Experienced faculty and industry-focused curriculum</li>
+            <li>Workshops, internships, and placement support</li>
+            <li>Modern infrastructure and smart classrooms</li>
+            <li>Strong alumni network</li>
+          </ul>
+        </div>
       </div>
 
-      <div className="fade-trigger" style={{ animationDelay: '0.5s' }}>
+      <div className="fade-trigger" style={{ maxWidth: '850px', margin: '0 auto', padding: 0 }}>
         <CourseForm facultyName="Faculty of Commerce" />
       </div>
     </div>

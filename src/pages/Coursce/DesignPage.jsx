@@ -19,14 +19,24 @@ const headingStyle = {
   animation: 'fadeDown 1s ease-out',
 };
 
-const infoCardStyle = {
-  maxWidth: '850px',
+const containerStyle = {
+  maxWidth: '1000px',
   margin: '0 auto 40px auto',
-  backgroundColor: '#fff5f8',
-  padding: '30px',
-  borderRadius: '15px',
-  border: '1px solid #ffccd9',
-  boxShadow: '0 8px 24px rgba(255, 192, 203, 0.25)',
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'flex-start',
+  justifyContent: 'center',
+  gap: '40px',
+  flexWrap: 'wrap',
+};
+
+const infoCardStyle = {
+  flex: '1 1 400px',
+  padding: '0',
+  borderRadius: '0',
+  backgroundColor: 'transparent',
+  border: 'none',
+  boxShadow: 'none',
   lineHeight: '1.7',
   color: '#660033',
   animation: 'fadeUp 1.2s ease-in',
@@ -37,13 +47,11 @@ const listStyle = {
 };
 
 const imageStyle = {
-  display: 'block',
-  margin: '0 auto 30px auto',
-  maxWidth: '420px',
+  flex: '0 0 400px',
   width: '100%',
   borderRadius: '12px',
-  boxShadow: '0 6px 16px rgba(255,192,203,0.25)',
   animation: 'zoomIn 1.2s ease',
+  minWidth: '280px',
 };
 
 const DesignPage = () => {
@@ -94,60 +102,68 @@ const DesignPage = () => {
           transform: translateY(40px);
           transition: all 1.2s ease;
         }
+
+        @media (max-width: 768px) {
+          .responsive-container {
+            flex-direction: column !important;
+          }
+        }
       `}
       </style>
 
       <h1 style={headingStyle}>Faculty of Design - Course Details</h1>
 
-      <img
-        src="https://paruluniversity.ac.in/app/20200122/images/faculty/880108Pic-1.jpg"
-        alt="Faculty of Design"
-        style={imageStyle}
-      />
+      <div className="fade-trigger responsive-container" style={containerStyle}>
+        <img
+          src="https://paruluniversity.ac.in/app/20200122/images/faculty/880108Pic-1.jpg"
+          alt="Faculty of Design"
+          style={imageStyle}
+        />
 
-      <div className="fade-trigger" style={infoCardStyle}>
-        <p>
-          The <strong>Faculty of Design</strong> is a hub of creativity and innovation, offering industry-relevant programs
-          in various branches of design. Our courses are structured to provide a balance of theoretical foundation and
-          practical experience to prepare students for real-world design challenges.
-        </p>
+        <div style={infoCardStyle}>
+          <p>
+            The <strong>Faculty of Design</strong> is a hub of creativity and innovation, offering industry-relevant programs
+            in various branches of design. Our courses are structured to provide a balance of theoretical foundation and
+            practical experience to prepare students for real-world design challenges.
+          </p>
 
-        <h3>📚 Courses Offered:</h3>
-        <ul style={listStyle}>
-          <li><strong>Bachelor of Design (B.Des)</strong> – 4 Years</li>
-          <li><strong>Bachelor of Fine Arts (BFA)</strong> – 3/4 Years</li>
-          <li><strong>Master in Fashion Design (MFD)</strong> – 2 Years</li>
-          <li><strong>Diploma in Interior Design</strong> – 1 Year</li>
-          <li><strong>Certification in Animation & Multimedia</strong> – 6 Months</li>
-        </ul>
+          <h3>📚 Courses Offered:</h3>
+          <ul style={listStyle}>
+            <li><strong>Bachelor of Design (B.Des)</strong> – 4 Years</li>
+            <li><strong>Bachelor of Fine Arts (BFA)</strong> – 3/4 Years</li>
+            <li><strong>Master in Fashion Design (MFD)</strong> – 2 Years</li>
+            <li><strong>Diploma in Interior Design</strong> – 1 Year</li>
+            <li><strong>Certification in Animation & Multimedia</strong> – 6 Months</li>
+          </ul>
 
-        <h3>🎓 Eligibility Criteria:</h3>
-        <ul style={listStyle}>
-          <li>10+2 pass for UG programs</li>
-          <li>Graduation in relevant stream for PG programs</li>
-          <li>Entrance exam + Portfolio for major design programs</li>
-        </ul>
+          <h3>🎓 Eligibility Criteria:</h3>
+          <ul style={listStyle}>
+            <li>10+2 pass for UG programs</li>
+            <li>Graduation in relevant stream for PG programs</li>
+            <li>Entrance exam + Portfolio for major design programs</li>
+          </ul>
 
-        <h3>💼 Career Opportunities:</h3>
-        <ul style={listStyle}>
-          <li>Fashion & Textile Designer</li>
-          <li>UI/UX Designer / Web Designer</li>
-          <li>Interior & Spatial Designer</li>
-          <li>Graphic Artist / Illustrator</li>
-          <li>Animation & Game Designer</li>
-        </ul>
+          <h3>💼 Career Opportunities:</h3>
+          <ul style={listStyle}>
+            <li>Fashion & Textile Designer</li>
+            <li>UI/UX Designer / Web Designer</li>
+            <li>Interior & Spatial Designer</li>
+            <li>Graphic Artist / Illustrator</li>
+            <li>Animation & Game Designer</li>
+          </ul>
 
-        <h3>🛠️ Tools & Skills You’ll Learn:</h3>
-        <ul style={listStyle}>
-          <li>Adobe Creative Suite (Photoshop, Illustrator, XD)</li>
-          <li>Sketch, Figma, Blender, AutoCAD</li>
-          <li>Design Thinking & Branding</li>
-          <li>Color Theory, Typography, Layout Design</li>
-          <li>Portfolio Development & Presentation Skills</li>
-        </ul>
+          <h3>🛠️ Tools & Skills You’ll Learn:</h3>
+          <ul style={listStyle}>
+            <li>Adobe Creative Suite (Photoshop, Illustrator, XD)</li>
+            <li>Sketch, Figma, Blender, AutoCAD</li>
+            <li>Design Thinking & Branding</li>
+            <li>Color Theory, Typography, Layout Design</li>
+            <li>Portfolio Development & Presentation Skills</li>
+          </ul>
+        </div>
       </div>
 
-      <div className="fade-trigger" style={{ animationDelay: '0.5s' }}>
+      <div className="fade-trigger" style={{ maxWidth: '850px', margin: '0 auto', padding: 0 }}>
         <CourseForm facultyName="Faculty of Design" />
       </div>
     </div>
