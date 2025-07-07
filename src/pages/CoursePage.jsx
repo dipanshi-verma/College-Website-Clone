@@ -2,13 +2,15 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Typography, Box } from '@mui/material';
-
 function CoursePage() {
   const { facultySlug } = useParams();
-  const displayName = facultySlug
-    .replace(/-/g, ' ')
-    .replace(/\b\w/g, (char) => char.toUpperCase());
-
+  const displayName = React.useMemo(() => {
+    if (!facultySlug) return 'Course';
+    const decodedSlug = decodeURIComponent(facultySlug);
+    return decodedSlug
+      .replace(/-/g, ' ')
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+  }, [facultySlug]);
   return (
     <Box sx={{ p: 4 }}>
       <Typography variant="h4" gutterBottom color="primary">
@@ -20,5 +22,4 @@ function CoursePage() {
     </Box>
   );
 }
-
 export default CoursePage;

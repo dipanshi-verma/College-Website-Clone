@@ -99,13 +99,10 @@ function Navbar({ footerRef }) {
           </ListItem>
         ))}
 
-        <ListItem
-          button
-          onClick={() => {
-            handleScrollToFooter();
-            handleDrawerToggle();
-          }}
-        >
+        <ListItem button onClick={() => {
+          handleScrollToFooter();
+          handleDrawerToggle();
+        }}>
           <ListItemText primary="Contact Us" />
         </ListItem>
 
