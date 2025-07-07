@@ -69,9 +69,7 @@ function Navbar({ footerRef }) {
   const location = useLocation();
 
   const isDesktop = () => window.innerWidth > 768;
-
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
-
   const handleScrollToFooter = () => {
     setAnchorFaculty(null);
     setAnchorAdmission(null);
@@ -111,7 +109,6 @@ function Navbar({ footerRef }) {
           <ListItemText primary="Contact Us" />
         </ListItem>
 
-        {/* Mobile Courses Dropdown */}
         <ListItem button onClick={() => setShowCourses(!showCourses)}>
           <ListItemText primary="Courses" />
         </ListItem>
@@ -128,7 +125,6 @@ function Navbar({ footerRef }) {
             </ListItem>
           ))}
 
-        {/* Mobile Admissions Dropdown */}
         <ListItem button onClick={() => setShowAdmissions(!showAdmissions)}>
           <ListItemText primary="Admissions" />
         </ListItem>
@@ -188,13 +184,10 @@ function Navbar({ footerRef }) {
                 Contact Us
               </Button>
 
-              {/* Courses Dropdown (Desktop) */}
               <Box
                 onMouseEnter={(e) => isDesktop() && setAnchorFaculty(e.currentTarget)}
                 onMouseLeave={() => isDesktop() && setAnchorFaculty(null)}
-                onClick={(e) =>
-                  !isDesktop() && setAnchorFaculty(anchorFaculty ? null : e.currentTarget)
-                }
+                onClick={(e) => !isDesktop() && setAnchorFaculty(anchorFaculty ? null : e.currentTarget)}
               >
                 <Button
                   sx={{
@@ -222,28 +215,29 @@ function Navbar({ footerRef }) {
                     >
                       <Grid container spacing={1}>
                         {CoursesDropdown.map((faculty, idx) => (
-                          <Link
-                            key={idx}
-                            to={`/courses/${faculty.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`}
-                            style={{ textDecoration: 'none' }}
-                          >
-                            <Typography
-                              sx={{
-                                fontSize: '0.85rem',
-                                cursor: 'pointer',
-                                px: 1,
-                                py: 0.5,
-                                borderRadius: 1,
-                                '&:hover': {
-                                  backgroundColor: '#BFDBFE',
-                                  transform: 'scale(1.05)',
-                                  transition: 'all 0.2s ease-in-out',
-                                },
-                              }}
+                          <Grid item xs={12} key={idx}>
+                            <Link
+                              to={`/courses/${faculty.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`}
+                              style={{ textDecoration: 'none' }}
                             >
-                              {faculty}
-                            </Typography>
-                          </Link>
+                              <Typography
+                                sx={{
+                                  fontSize: '0.85rem',
+                                  cursor: 'pointer',
+                                  px: 1,
+                                  py: 0.5,
+                                  borderRadius: 1,
+                                  '&:hover': {
+                                    backgroundColor: '#BFDBFE',
+                                    transform: 'scale(1.05)',
+                                    transition: 'all 0.2s ease-in-out',
+                                  },
+                                }}
+                              >
+                                {faculty}
+                              </Typography>
+                            </Link>
+                          </Grid>
                         ))}
                       </Grid>
                     </Paper>
@@ -251,13 +245,10 @@ function Navbar({ footerRef }) {
                 </Popper>
               </Box>
 
-              {/* Admissions Dropdown (Desktop) */}
               <Box
                 onMouseEnter={(e) => isDesktop() && setAnchorAdmission(e.currentTarget)}
                 onMouseLeave={() => isDesktop() && setAnchorAdmission(null)}
-                onClick={(e) =>
-                  !isDesktop() && setAnchorAdmission(anchorAdmission ? null : e.currentTarget)
-                }
+                onClick={(e) => !isDesktop() && setAnchorAdmission(anchorAdmission ? null : e.currentTarget)}
               >
                 <Button
                   sx={{
@@ -285,29 +276,30 @@ function Navbar({ footerRef }) {
                     >
                       <Grid container spacing={2}>
                         {Object.values(admissionDropdown).flat().map((program, idx) => (
-                          <Link
-                            key={idx}
-                            to={`/admissions/${program.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`}
-                            style={{ textDecoration: 'none' }}
-                          >
-                            <Typography
-                              sx={{
-                                fontSize: '0.85rem',
-                                cursor: 'pointer',
-                                px: 1,
-                                py: 0.5,
-                                borderRadius: 1,
-                                fontWeight: '500',
-                                '&:hover': {
-                                  backgroundColor: '#BFDBFE',
-                                  transform: 'scale(1.05)',
-                                  transition: 'all 0.2s ease-in-out',
-                                },
-                              }}
+                          <Grid item xs={6} key={idx}>
+                            <Link
+                              to={`/admissions/${program.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`}
+                              style={{ textDecoration: 'none' }}
                             >
-                              {program}
-                            </Typography>
-                          </Link>
+                              <Typography
+                                sx={{
+                                  fontSize: '0.85rem',
+                                  cursor: 'pointer',
+                                  px: 1,
+                                  py: 0.5,
+                                  borderRadius: 1,
+                                  fontWeight: '500',
+                                  '&:hover': {
+                                    backgroundColor: '#BFDBFE',
+                                    transform: 'scale(1.05)',
+                                    transition: 'all 0.2s ease-in-out',
+                                  },
+                                }}
+                              >
+                                {program}
+                              </Typography>
+                            </Link>
+                          </Grid>
                         ))}
                       </Grid>
                     </Paper>
@@ -316,7 +308,6 @@ function Navbar({ footerRef }) {
               </Box>
             </Box>
 
-            {/* Mobile Menu Icon */}
             <Box className="md:hidden">
               <IconButton onClick={handleDrawerToggle}>
                 <MenuIcon className="text-blue-900" />
@@ -326,7 +317,6 @@ function Navbar({ footerRef }) {
         </Container>
       </AppBar>
 
-      {/* Mobile Drawer */}
       <Drawer anchor="right" open={mobileOpen} onClose={handleDrawerToggle}>
         {drawerContent}
       </Drawer>
